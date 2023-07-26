@@ -1,0 +1,10 @@
+jdk:
+  - openjdk17
+
+before_install:
+  - ./scripts/prepareJitpackEnvironment.sh
+
+modules:
+  - name: baseProject
+    build:
+      - ./gradlew :baseProject:build
