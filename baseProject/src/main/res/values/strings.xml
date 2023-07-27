@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Homework Helper Hotline</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="terms_agree">I agree to the</string>
+    <string name="terms_and_conditions">terms and conditions</string>
+</resources>

@@ -1,11 +1,21 @@
 package com.jmg.hhbase.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.jmg.hhbase.R
 
+val DroidFontFamily = FontFamily(
+    Font(com.jmg.baseproject.R.font.droid_sans)
+)
+
+val DroidFontBold = FontFamily(
+    Font(com.jmg.baseproject.R.font.droid_sans_bold)
+)
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
@@ -14,6 +24,11 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily(arrayListOf(Font(com.jmg.baseproject.R.font.droid_sans_bold))),
+        color = Color.White,
+        fontSize = 18.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
@@ -31,4 +46,6 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+
+
 )

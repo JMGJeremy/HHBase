@@ -66,6 +66,17 @@ dependencies {
     implementation (libs.androidx.constraintlayout.compose)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation (libs.androidx.hilt.navigation.compose)
+
+    //FontAwesome
+    implementation("com.github.Gurupreet:FontAwesomeCompose:1.0.0")
+
+    //coil
+    implementation(libs.coil.compose)
+
+// retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.logging.interceptor)
 }
 
 publishing{

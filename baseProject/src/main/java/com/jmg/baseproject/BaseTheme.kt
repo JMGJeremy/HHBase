@@ -1,44 +1,67 @@
-package com.jmg.hhbase.ui.theme
+package com.jmg.baseproject
 
 import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = HHHPrimaryColor,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
+
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)
+
+
+
+val HHHPrimaryColor = Color(android.graphics.Color.parseColor("#F5F5F5"))
+val LightGray = Color(red = 240, green = 240, blue = 240)
+val SlideOutMenuGrey = Color(red = 0f, green = 0f, blue = 0f, alpha = .6f)
+val HHHSecondaryColor = Color(android.graphics.Color.parseColor("#005F73"))
+val ButtonBackground = Color(android.graphics.Color.parseColor("#005F73"))
 
 private val LightColorScheme = lightColorScheme(
-    primary = ButtonBackground,
-    onPrimary = Color.Black,
+    primary = HHHPrimaryColor,
     secondary = PurpleGrey40,
     tertiary = Pink40,
     background = LightGray,
-    onBackground = Color.Black
+)
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+
+val DroidFontFamily = FontFamily(
+    Font(R.font.droid_sans)
+)
+
+val DroidFontBold = FontFamily(
+    Font(R.font.droid_sans_bold)
+)
+
+val Typography = Typography(
+    bodyLarge = TextStyle(
+        fontFamily = DroidFontFamily,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily(arrayListOf(Font(com.jmg.baseproject.R.font.droid_sans_bold))),
+        color = Color.White
+    )
 )
 
 @Composable
