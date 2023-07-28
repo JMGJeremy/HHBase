@@ -1,5 +1,6 @@
 package com.jmg.baseproject.ui.text.textFields
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -45,12 +46,7 @@ fun TfEmail(
             value.value = it
         },
         modifier = modifier
-            .height(60.dp)
-            .border(
-                width = 1.dp,
-                color = Color.Transparent,
-                shape = RoundedCornerShape(20.dp)
-            ),
+            .height(60.dp),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Color.Gray,
             focusedIndicatorColor = Color.Transparent,
@@ -81,6 +77,7 @@ fun TfEmail(
                 onNext = { focus.moveFocus(focusDirection) }
             ),
         trailingIcon = trailingIcon,
+        shape = RoundedCornerShape(50)
     )
 
 }

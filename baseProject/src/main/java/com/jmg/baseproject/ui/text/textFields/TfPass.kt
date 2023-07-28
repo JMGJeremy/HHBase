@@ -68,12 +68,7 @@ fun TfPass(
             input.value = it
         },
         modifier = modifier
-            .height(60.dp)
-            .border(
-                width = 1.dp,
-                color = Color.Transparent,
-                shape = RoundedCornerShape(20.dp)
-            ),
+            .height(60.dp),
         visualTransformation = if (passwordVisible.value){
             PasswordVisualTransformation()
         }else{
@@ -120,6 +115,7 @@ fun TfPass(
                     keyboard?.hide()
                 }
             ),
+        shape = RoundedCornerShape(50)
     )
 }
 
