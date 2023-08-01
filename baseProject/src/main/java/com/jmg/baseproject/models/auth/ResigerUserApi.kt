@@ -12,5 +12,7 @@ data class UserRegisterApi(
     @SerializedName("password_confirmation")
     val confirmation: String? = "",
     @SerializedName("user_type")
-    val type: String? = ""
+    val type: String? = "",
+    @SerializedName("under_18")
+    val under18: Boolean = false
 )

@@ -76,7 +76,7 @@ fun RegisterScreen(
     val progress = remember { mutableStateOf(false) }
     val keyboard = LocalSoftwareKeyboardController.current
 
-    val passwordVis = remember { mutableStateOf<Boolean>(false)}
+    val passwordVis = remember { mutableStateOf<Boolean>(true)}
 
     val mod = Modifier
         .fillMaxWidth()
@@ -197,8 +197,8 @@ fun RegisterScreen(
                     terms.value = !terms.value
                 },
                 colors = CheckboxDefaults.colors(
-                    checkedColor = MaterialTheme.colorScheme.onPrimary,
-                    uncheckedColor = MaterialTheme.colorScheme.onPrimary,
+                    checkedColor = MaterialTheme.colorScheme.onBackground,
+                    uncheckedColor = MaterialTheme.colorScheme.onBackground,
                     checkmarkColor = MaterialTheme.colorScheme.background,
                 )
             )

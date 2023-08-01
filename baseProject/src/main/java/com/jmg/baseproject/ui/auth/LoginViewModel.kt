@@ -56,7 +56,9 @@ class BaseLoginViewModel(baseUrl: String): ViewModel() {
                 lastName = last,
                 email = email,
                 password = pass,
-                confirmation = confirm
+                confirmation = confirm,
+                type = "password",
+                under18 = false
             )
         ).enqueue(object: Callback<Any?>{
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
