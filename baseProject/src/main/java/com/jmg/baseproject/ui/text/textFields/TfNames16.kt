@@ -48,11 +48,11 @@ fun TfNames16(
             .border(
                 width = 1.dp,
                 color = Color.Transparent,
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(50)
             ),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Color.Gray,
-            focusedIndicatorColor = Color.Gray,
+            focusedIndicatorColor = Color.Transparent,
             errorIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
@@ -79,7 +79,8 @@ fun TfNames16(
             ?: KeyboardActions(
                 onNext = { focus.moveFocus(FocusDirection.Next) }
             ),
-        trailingIcon = trailingIcon
+        trailingIcon = trailingIcon,
+        shape = RoundedCornerShape(50)
     )
 
 }

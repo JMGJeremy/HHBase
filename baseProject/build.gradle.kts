@@ -82,9 +82,9 @@ dependencies {
 publishing{
     publications{
         register<MavenPublication>("release"){
-            groupId = "com.jeremykruid.baseProject"
-            artifactId = "baseProject"
-            version = "1.0.0"
+            groupId = "com.jmgjeremy"
+            artifactId = "hhbase"
+            version = "1.0.1"
             afterEvaluate{
                 from(components["release"])
             }

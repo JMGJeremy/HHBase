@@ -43,7 +43,8 @@ fun LoginScreen(
     forgot: ()-> Unit,
     login: () -> Unit,
     error: MutableState<String?>,
-    logo: Int
+    logo: Int,
+    register: ()-> Unit
 ){
 
     val context = LocalContext.current
@@ -139,7 +140,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .padding(top = 32.dp)
                         .clickable {
-                            forgot.invoke()
+                            register.invoke()
                         }
                 )
             }
@@ -158,7 +159,8 @@ fun LoginViewPreview(){
         forgot = {},
         login = {},
         error = remember { mutableStateOf(null) },
-        logo = R.drawable.logo
+        logo = R.drawable.logo,
+        register = {}
     )
 
 }

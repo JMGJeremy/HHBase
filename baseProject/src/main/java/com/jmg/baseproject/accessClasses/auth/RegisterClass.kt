@@ -8,7 +8,7 @@ import com.jmg.baseproject.ui.auth.RegisterScreen
 import retrofit2.Response
 
 class RegisterClass(
-    baseUrl: String
+    baseUrl: String,
 ) {
 
     private val viewModel = BaseLoginViewModel(baseUrl = baseUrl)

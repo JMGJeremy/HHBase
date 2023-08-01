@@ -8,9 +8,13 @@ import com.jmg.baseproject.ui.auth.BaseLoginViewModel
 import com.jmg.baseproject.ui.auth.LoginScreen
 import retrofit2.Response
 
-class LoginClass(baseUrl: String) {
+class LoginClass(
+    baseUrl: String,
+    register: ()->Unit
+) {
 
     private val viewModel = BaseLoginViewModel(baseUrl = baseUrl)
+    private var reg = register
 
     @Composable
     fun GetLoginScreen(
@@ -38,6 +42,7 @@ class LoginClass(baseUrl: String) {
             },
             error = error,
             logo = logo,
+            register = reg
         )
     }
 }

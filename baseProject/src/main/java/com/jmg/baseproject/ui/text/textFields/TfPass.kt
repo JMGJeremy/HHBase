@@ -76,7 +76,7 @@ fun TfPass(
         },
         colors = TextFieldDefaults.textFieldColors(
             textColor = Color.Gray,
-            focusedIndicatorColor = Color.Gray,
+            focusedIndicatorColor = Color.Transparent,
             errorIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
