@@ -13,7 +13,7 @@ class LoginClass(
     register: ()->Unit
 ) {
 
-    private val viewModel = BaseLoginViewModel(baseUrl = baseUrl)
+    private val viewModel = BaseLoginViewModel(baseUrl = baseUrl, userType = "")
     private var reg = register
 
     @Composable

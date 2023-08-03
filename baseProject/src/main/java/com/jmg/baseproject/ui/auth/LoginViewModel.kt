@@ -10,11 +10,16 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class BaseLoginViewModel(baseUrl: String): ViewModel() {
+class BaseLoginViewModel(baseUrl: String, userType: String): ViewModel() {
 
     private val TAG = "BaseLoginViewModel"
 
     private val service = ApiService.getInstance(baseUrl = baseUrl)
+    private var type: String = "parent"
+
+    init {
+        type = userType
+    }
 
     fun loginUser(
         email: String,
@@ -57,7 +62,7 @@ class BaseLoginViewModel(baseUrl: String): ViewModel() {
                 email = email,
                 password = pass,
                 confirmation = confirm,
-                type = "password",
+                type = type,
                 under18 = false
             )
         ).enqueue(object: Callback<Any?>{

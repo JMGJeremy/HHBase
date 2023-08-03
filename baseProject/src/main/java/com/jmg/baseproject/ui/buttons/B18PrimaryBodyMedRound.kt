@@ -40,7 +40,7 @@ fun B18PrimaryBodyMedRound(
         },
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
-            disabledContainerColor = MaterialTheme.colorScheme.primary
+            disabledContainerColor = MaterialTheme.colorScheme.primary,
         ),
     ){
         Text(text = text,

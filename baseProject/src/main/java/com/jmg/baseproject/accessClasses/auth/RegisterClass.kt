@@ -3,15 +3,19 @@ package com.jmg.baseproject.accessClasses.auth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import com.jmg.baseproject.R
 import com.jmg.baseproject.ui.auth.BaseLoginViewModel
 import com.jmg.baseproject.ui.auth.RegisterScreen
 import retrofit2.Response
 
+
 class RegisterClass(
     baseUrl: String,
+    userType: String,
 ) {
 
-    private val viewModel = BaseLoginViewModel(baseUrl = baseUrl)
+    private val viewModel = BaseLoginViewModel(baseUrl = baseUrl, userType = userType)
 
     @Composable
     fun GetRegisterScreen(
@@ -22,6 +26,12 @@ class RegisterClass(
         confirm: MutableState<String?>,
         err: MutableState<String?>,
         resp: MutableState<Response<Any?>?>,
+        optionOne: String,
+        optionTwo: String,
+        selected: MutableState<String>,
+        logoInt: Int,
+        back: ()->Unit,
+        terms: ()->Unit
         ){
         RegisterScreen(
             firstName = first,
@@ -40,9 +50,12 @@ class RegisterClass(
             )
                        },
             errorText = err,
-            navBack = {
-
-            },
+            logo = logoInt,
+            back = back,
+            termsClick = terms,
+            option1 = optionOne,
+            option2 = optionTwo,
+            selected = selected
             )
     }
 }

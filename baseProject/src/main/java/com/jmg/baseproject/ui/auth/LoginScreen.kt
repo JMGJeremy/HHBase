@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ColorScheme
@@ -34,6 +35,7 @@ import com.jmg.baseproject.ui.buttons.B18PrimaryBodyMedRound
 import com.jmg.baseproject.ui.text.textFields.TfEmail
 import com.jmg.baseproject.ui.text.textFields.TfPass
 import com.jmg.baseproject.R
+import com.jmg.baseproject.ui.images.Logo
 
 @Composable
 fun LoginScreen(
@@ -53,38 +55,44 @@ fun LoginScreen(
         .fillMaxSize()
         .background(color = MaterialTheme.colorScheme.background)
         .padding(horizontal = 36.dp),
-    horizontalAlignment = Alignment.CenterHorizontally
+    horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Image(
-            painter = rememberAsyncImagePainter(model = context.getDrawable(logo)),
-            contentDescription = null,
+        Logo(
+            context = context,
+            logo = logo,
             modifier = Modifier
-                .padding(16.dp)
+                .height(300.dp)
         )
 
-        TfEmail(
-            value = email,
-            label = "Email Address",
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email
-            ),
-            focusDirection = FocusDirection.Next
-        )
+        ) {
 
-        TfPass(
-            input = password,
-            passwordVisible = passwordVis,
-            textColor = Color.Gray,
-            focusDirection = FocusDirection.Next,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
+            TfEmail(
+                value = email,
+                label = "Email Address",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                ),
+                focusDirection = FocusDirection.Next
+            )
 
-            ),
-        )
+            TfPass(
+                input = password,
+                passwordVisible = passwordVis,
+                textColor = Color.Gray,
+                focusDirection = FocusDirection.Next,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+
+                    ),
+            )
+        }
 
         Column(
             modifier = Modifier

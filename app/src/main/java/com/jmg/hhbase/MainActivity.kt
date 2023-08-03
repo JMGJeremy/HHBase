@@ -29,28 +29,38 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginClass(baseUrl = "https://sandbox.homeworkhelperapp.org").GetLoginScreen(
-                        email = remember { mutableStateOf("") },
-                        password = remember { mutableStateOf("") },
-                        passwordVis = remember { mutableStateOf(false) },
-                        forgot = { /*TODO*/ },
-//                        login = { /*TODO*/ },
-                        error = remember { mutableStateOf("") },
-                        logo = R.drawable.ic_launcher_foreground,
-                        response = remember { mutableStateOf(null) }
-                    )
-
-//                    RegisterClass(
+//                    LoginClass(
 //                        baseUrl = "https://sandbox.homeworkhelperapp.org",
-//                    ).GetRegisterScreen(
-//                        resp = remember { mutableStateOf(null)},
-//                        err = remember { mutableStateOf(null)},
-//                        first = remember { mutableStateOf("") },
-//                        last = remember { mutableStateOf("") },
+//                        register = {}
+//                    ).GetLoginScreen(
 //                        email = remember { mutableStateOf("") },
-//                        pass = remember { mutableStateOf("") },
-//                        confirm = remember { mutableStateOf("") },
+//                        password = remember { mutableStateOf("") },
+//                        passwordVis = remember { mutableStateOf(false) },
+//                        forgot = { /*TODO*/ },
+////                        login = { /*TODO*/ },
+//                        error = remember { mutableStateOf("") },
+//                        logo = R.drawable.ic_launcher_foreground,
+//                        response = remember { mutableStateOf(null) }
 //                    )
+
+                    RegisterClass(
+                        baseUrl = "https://sandbox.homeworkhelperapp.org",
+                        userType = "parent",
+                    ).GetRegisterScreen(
+                        resp = remember { mutableStateOf(null)},
+                        err = remember { mutableStateOf(null)},
+                        first = remember { mutableStateOf("") },
+                        last = remember { mutableStateOf("") },
+                        email = remember { mutableStateOf("") },
+                        pass = remember { mutableStateOf("") },
+                        confirm = remember { mutableStateOf("") },
+                        logoInt = R.drawable.ic_launcher_foreground,
+                        back = {},
+                        optionOne = "Parent",
+                        optionTwo = "Student",
+                        selected = remember { mutableStateOf("Parent")},
+                        terms = {}
+                    )
                 }
             }
         }
@@ -68,7 +78,8 @@ fun GreetingPreview() {
             forgot = {},
             login = {},
             error = remember { mutableStateOf(null)},
-            logo = R.drawable.ic_launcher_foreground
+            logo = R.drawable.ic_launcher_foreground,
+            register = {}
         )
     }
 }
