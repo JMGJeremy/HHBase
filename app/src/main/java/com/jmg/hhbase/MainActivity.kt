@@ -45,7 +45,6 @@ class MainActivity : ComponentActivity() {
 
                     RegisterClass(
                         baseUrl = "https://sandbox.homeworkhelperapp.org",
-                        userType = "parent",
                     ).GetRegisterScreen(
                         resp = remember { mutableStateOf(null)},
                         err = remember { mutableStateOf(null)},
@@ -58,7 +57,6 @@ class MainActivity : ComponentActivity() {
                         back = {},
                         optionOne = "Parent",
                         optionTwo = "Student",
-                        selected = remember { mutableStateOf("Parent")},
                         terms = {}
                     )
                 }

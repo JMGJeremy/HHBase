@@ -2,7 +2,11 @@ package com.jmg.baseproject.models.auth
 
 import com.google.gson.annotations.SerializedName
 
-data class UserRegisterApi(
+data class RegisterUserApi(
+        val user: RegisterUser
+        )
+
+data class RegisterUser(
     val email: String? = "",
     @SerializedName("first_name")
     val firstName: String? = "",

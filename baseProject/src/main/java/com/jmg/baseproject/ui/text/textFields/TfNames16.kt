@@ -80,7 +80,10 @@ fun TfNames16(
                 onNext = { focus.moveFocus(FocusDirection.Next) }
             ),
         trailingIcon = trailingIcon,
-        shape = RoundedCornerShape(50)
+        shape = RoundedCornerShape(50),
+        textStyle = TextStyle(
+            fontSize = 18.sp
+        )
     )
 
 }

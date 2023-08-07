@@ -12,10 +12,10 @@ import retrofit2.Response
 
 class RegisterClass(
     baseUrl: String,
-    userType: String,
 ) {
 
-    private val viewModel = BaseLoginViewModel(baseUrl = baseUrl, userType = userType)
+    private val viewModel = BaseLoginViewModel(baseUrl = baseUrl)
+    private val selected = mutableStateOf("Parent")
 
     @Composable
     fun GetRegisterScreen(
@@ -28,7 +28,6 @@ class RegisterClass(
         resp: MutableState<Response<Any?>?>,
         optionOne: String,
         optionTwo: String,
-        selected: MutableState<String>,
         logoInt: Int,
         back: ()->Unit,
         terms: ()->Unit
@@ -46,9 +45,9 @@ class RegisterClass(
                 first = first.value,
                 last = last.value,
                 error = err,
-                resp = resp
-            )
-                       },
+                resp = resp,
+                type = selected.value.lowercase()
+            ) },
             errorText = err,
             logo = logoInt,
             back = back,

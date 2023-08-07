@@ -10,16 +10,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class BaseLoginViewModel(baseUrl: String, userType: String): ViewModel() {
+class BaseLoginViewModel(baseUrl: String): ViewModel() {
 
     private val TAG = "BaseLoginViewModel"
 
     private val service = ApiService.getInstance(baseUrl = baseUrl)
-    private var type: String = "parent"
 
-    init {
-        type = userType
-    }
 
     fun loginUser(
         email: String,
@@ -53,10 +49,12 @@ class BaseLoginViewModel(baseUrl: String, userType: String): ViewModel() {
         first: String?,
         last: String?,
         resp: MutableState<Response<Any?>?>,
-        error: MutableState<String?>
+        error: MutableState<String?>,
+        type: String
     ) {
         service.registerUser(
-            user = UserRegisterApi(
+            user = RegisterUserApi(
+                RegisterUser(
                 firstName = first,
                 lastName = last,
                 email = email,
@@ -64,7 +62,7 @@ class BaseLoginViewModel(baseUrl: String, userType: String): ViewModel() {
                 confirmation = confirm,
                 type = type,
                 under18 = false
-            )
+            ))
         ).enqueue(object: Callback<Any?>{
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                 resp.value = response
