@@ -46,7 +46,8 @@ fun LoginScreen(
     login: () -> Unit,
     error: MutableState<String?>,
     logo: Int,
-    register: ()-> Unit
+    register: ()-> Unit,
+    progress: MutableState<Boolean>
 ){
 
     val context = LocalContext.current
@@ -110,6 +111,7 @@ fun LoginScreen(
                         !(email.value?.contains("@") == true && email.value?.contains(".") == true)-> {error.value = "Email is malformed"}
                         password.value.isNullOrEmpty() -> { error.value = "Please enter your password"}
                         else -> {
+                            progress.value = true
                             login.invoke()
                         }
                     }
@@ -168,7 +170,8 @@ fun LoginViewPreview(){
         login = {},
         error = remember { mutableStateOf(null) },
         logo = R.drawable.logo,
-        register = {}
+        register = {},
+        progress = remember { mutableStateOf(false)}
     )
 
 }

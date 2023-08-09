@@ -57,7 +57,8 @@ class MainActivity : ComponentActivity() {
                         back = {},
                         optionOne = "Parent",
                         optionTwo = "Student",
-                        terms = {}
+                        terms = {},
+                        progress = remember { mutableStateOf(false)}
                     )
                 }
             }
@@ -77,7 +78,8 @@ fun GreetingPreview() {
             login = {},
             error = remember { mutableStateOf(null)},
             logo = R.drawable.ic_launcher_foreground,
-            register = {}
+            register = {},
+            progress = remember { mutableStateOf(false)}
         )
     }
 }

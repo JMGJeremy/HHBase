@@ -3,6 +3,8 @@ package com.jmg.baseproject.accessClasses.auth
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.jmg.baseproject.ui.auth.BaseLoginViewModel
 import com.jmg.baseproject.ui.auth.LoginScreen
@@ -24,7 +26,8 @@ class LoginClass(
         forgot: ()->Unit,
         error: MutableState<String?>,
         logo: Int,
-        response: MutableState<Response<Any?>?>
+        response: MutableState<Response<Any?>?>,
+        progress: MutableState<Boolean>
         ){
 
         LoginScreen(
@@ -42,7 +45,8 @@ class LoginClass(
             },
             error = error,
             logo = logo,
-            register = reg
+            register = reg,
+            progress = progress
         )
     }
 }

@@ -30,7 +30,8 @@ class RegisterClass(
         optionTwo: String,
         logoInt: Int,
         back: ()->Unit,
-        terms: ()->Unit
+        terms: ()->Unit,
+        progress: MutableState<Boolean>
         ){
         RegisterScreen(
             firstName = first,
@@ -38,23 +39,27 @@ class RegisterClass(
             email = email,
             password = pass,
             confirm = confirm,
-            register = { viewModel.registerUser(
-                email = email.value,
-                pass = pass.value,
-                confirm = confirm.value,
-                first = first.value,
-                last = last.value,
-                error = err,
-                resp = resp,
-                type = selected.value.lowercase()
-            ) },
+            register = {
+
+                viewModel.registerUser(
+                    email = email.value,
+                    pass = pass.value,
+                    confirm = confirm.value,
+                    first = first.value,
+                    last = last.value,
+                    error = err,
+                    resp = resp,
+                    type = selected.value.lowercase()
+                )
+                       },
             errorText = err,
             logo = logoInt,
             back = back,
             termsClick = terms,
             option1 = optionOne,
             option2 = optionTwo,
-            selected = selected
+            selected = selected,
+            progress = progress
             )
     }
 }

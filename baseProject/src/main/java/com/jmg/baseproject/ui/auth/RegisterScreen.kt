@@ -73,7 +73,8 @@ fun RegisterScreen(
     termsClick: ()->Unit,
     option1: String,
     option2: String,
-    selected: MutableState<String>
+    selected: MutableState<String>,
+    progress: MutableState<Boolean>
 ){
 
     val context = LocalContext.current
@@ -310,6 +311,7 @@ fun RegisterScreen(
             ClickableText(
                 text = termsString,
                 onClick = {
+                    progress.value = true
                           termsClick.invoke()
                 },
                 modifier = Modifier
@@ -339,7 +341,8 @@ fun RegisterViewPreview(){
             termsClick = {},
             option1 = "Parent",
             option2 = "Student",
-            selected = remember {mutableStateOf("Parent")}
+            selected = remember {mutableStateOf("Parent")},
+            progress = remember { mutableStateOf(false)}
         )
     }
 }

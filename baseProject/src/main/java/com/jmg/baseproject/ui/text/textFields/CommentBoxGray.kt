@@ -42,6 +42,18 @@ fun CommentBoxGray(
             errorIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
+            disabledSupportingTextColor = Color.Gray,
+            disabledTextColor = Color.Gray,
+            errorSupportingTextColor = Color.Gray,
+            errorTextColor = Color.Gray,
+            focusedSupportingTextColor = Color.Gray,
+            focusedTextColor = Color.Gray,
+            unfocusedSupportingTextColor = Color.Gray,
+            unfocusedTextColor = Color.Gray,
+            disabledContainerColor = MaterialTheme.colorScheme.background,
+            errorContainerColor = MaterialTheme.colorScheme.background,
+            focusedContainerColor = MaterialTheme.colorScheme.background,
+            unfocusedContainerColor = MaterialTheme.colorScheme.background,
         ),
         modifier = modifier,
         shape = RoundedCornerShape(16.dp),
@@ -51,7 +63,10 @@ fun CommentBoxGray(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = label)
+                Text(
+                    text = label,
+                    color = Color.Gray
+                )
             }
         },
     )
