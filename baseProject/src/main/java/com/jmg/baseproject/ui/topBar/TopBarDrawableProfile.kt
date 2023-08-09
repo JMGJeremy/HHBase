@@ -27,7 +27,6 @@ import com.jmg.baseproject.HHBaseTheme
 import com.jmg.baseproject.R
 import com.jmg.baseproject.ui.text.textView.TV22B700
 
-
 @Composable
 fun TopBarDrawableProfile(
     modifier: Modifier,
