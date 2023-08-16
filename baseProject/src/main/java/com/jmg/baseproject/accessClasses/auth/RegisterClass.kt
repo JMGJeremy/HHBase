@@ -31,7 +31,8 @@ class RegisterClass(
         logoInt: Int,
         back: ()->Unit,
         terms: ()->Unit,
-        progress: MutableState<Boolean>
+        progress: MutableState<Boolean>,
+        zip: MutableState<String?>,
         ){
         RegisterScreen(
             firstName = first,
@@ -49,7 +50,8 @@ class RegisterClass(
                     last = last.value,
                     error = err,
                     resp = resp,
-                    type = selected.value.lowercase()
+                    type = selected.value.lowercase(),
+                    zip = zip.value
                 )
                        },
             errorText = err,
@@ -59,7 +61,8 @@ class RegisterClass(
             option1 = optionOne,
             option2 = optionTwo,
             selected = selected,
-            progress = progress
+            progress = progress,
+            zip = zip
             )
     }
 }

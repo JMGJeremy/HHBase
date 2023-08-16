@@ -50,19 +50,22 @@ class BaseLoginViewModel(baseUrl: String): ViewModel() {
         last: String?,
         resp: MutableState<Response<Any?>?>,
         error: MutableState<String?>,
-        type: String
+        type: String,
+        zip: String?
     ) {
         service.registerUser(
             user = RegisterUserApi(
                 RegisterUser(
-                firstName = first,
-                lastName = last,
-                email = email,
-                password = pass,
-                confirmation = confirm,
-                type = type,
-                under18 = false
-            ))
+                    firstName = first,
+                    lastName = last,
+                    email = email,
+                    password = pass,
+                    confirmation = confirm,
+                    type = type,
+                    under18 = false,
+                    zip = zip
+                )
+            )
         ).enqueue(object: Callback<Any?>{
             override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                 resp.value = response

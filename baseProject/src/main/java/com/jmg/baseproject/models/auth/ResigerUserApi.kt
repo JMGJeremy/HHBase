@@ -18,5 +18,7 @@ data class RegisterUser(
     @SerializedName("user_type")
     val type: String? = "",
     @SerializedName("under_18")
-    val under18: Boolean = false
+    val under18: Boolean = false,
+    @SerializedName("zipcode")
+    val zip: String? = ""
 )

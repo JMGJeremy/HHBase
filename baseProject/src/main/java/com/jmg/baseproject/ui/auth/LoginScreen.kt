@@ -1,6 +1,5 @@
 package com.jmg.baseproject.ui.auth
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,11 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ColorScheme
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -30,12 +29,11 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import com.jmg.baseproject.R
 import com.jmg.baseproject.ui.buttons.B18PrimaryBodyMedRound
+import com.jmg.baseproject.ui.images.Logo
 import com.jmg.baseproject.ui.text.textFields.TfEmail
 import com.jmg.baseproject.ui.text.textFields.TfPass
-import com.jmg.baseproject.R
-import com.jmg.baseproject.ui.images.Logo
 
 @Composable
 fun LoginScreen(
@@ -51,6 +49,8 @@ fun LoginScreen(
 ){
 
     val context = LocalContext.current
+    val scroll = rememberScrollState()
+
     Column(
     modifier = Modifier
         .fillMaxSize()
@@ -69,6 +69,7 @@ fun LoginScreen(
 
         Column(
             modifier = Modifier
+                .verticalScroll(scroll)
         ) {
 
             TfEmail(

@@ -58,7 +58,8 @@ class MainActivity : ComponentActivity() {
                         optionOne = "Parent",
                         optionTwo = "Student",
                         terms = {},
-                        progress = remember { mutableStateOf(false)}
+                        progress = remember { mutableStateOf(false)},
+                        zip = remember { mutableStateOf(null)}
                     )
                 }
             }

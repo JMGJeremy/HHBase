@@ -66,6 +66,7 @@ fun RegisterScreen(
     email: MutableState<String?>,
     password: MutableState<String?>,
     confirm: MutableState<String?>,
+    zip: MutableState<String?>,
     register: () -> Unit,
     errorText: MutableState<String?>,
     back: ()->Unit,
@@ -145,7 +146,10 @@ fun RegisterScreen(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
                 .height(36.dp)
-                .background(color = MaterialTheme.colorScheme.surface, shape = RoundedCornerShape(10.dp))
+                .background(
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(10.dp)
+                )
                 .padding(4.dp)
         ){
             Row(
@@ -154,11 +158,11 @@ fun RegisterScreen(
                     .fillMaxHeight()
                     .weight(1f)
                     .background(
-                        color = if (selected.value == option1){
+                        color = if (selected.value == option1) {
                             MaterialTheme.colorScheme.background
-                        } else{
-                              Color.Transparent
-                              },
+                        } else {
+                            Color.Transparent
+                        },
                         shape = RoundedCornerShape(8.dp)
                     )
                     .clickable { selected.value = option1 },
@@ -179,9 +183,9 @@ fun RegisterScreen(
                     .fillMaxHeight()
                     .weight(1f)
                     .background(
-                        color = if (selected.value == option2){
+                        color = if (selected.value == option2) {
                             MaterialTheme.colorScheme.background
-                        } else{
+                        } else {
                             Color.Transparent
                         },
                         shape = RoundedCornerShape(8.dp)
@@ -245,11 +249,23 @@ fun RegisterScreen(
                 focusDirection = FocusDirection.Down
             )
 
+            TfNames16(
+                value = zip,
+                label = "Zip Code",
+                modifier = mod,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                )
+            ) {
+
+            }
+
             TfPass(
                 input = password,
                 passwordVisible = passwordVis,
                 textColor = MaterialTheme.colorScheme.onPrimary,
-                focusDirection = FocusDirection.Down,
+                focusDirection = FocusDirection.Next,
             )
 
 
@@ -342,7 +358,8 @@ fun RegisterViewPreview(){
             option1 = "Parent",
             option2 = "Student",
             selected = remember {mutableStateOf("Parent")},
-            progress = remember { mutableStateOf(false)}
+            progress = remember { mutableStateOf(false)},
+            zip = remember { mutableStateOf("")}
         )
     }
 }
