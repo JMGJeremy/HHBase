@@ -91,7 +91,6 @@ fun LoginScreen(
                 focusDirection = FocusDirection.Next,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
-
                     ),
             )
         }

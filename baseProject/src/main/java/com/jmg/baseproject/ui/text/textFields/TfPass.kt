@@ -120,7 +120,8 @@ fun TfPass(
         shape = RoundedCornerShape(50),
         textStyle = TextStyle(
             fontSize = 18.sp
-        )
+        ),
+        maxLines = 1
     )
 }
 
