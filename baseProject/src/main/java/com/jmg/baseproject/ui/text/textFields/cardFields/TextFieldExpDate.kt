@@ -1,0 +1,126 @@
+package com.jmg.baseproject.ui.text.textFields.cardFields
+
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.jmg.baseproject.HHBaseTheme
+
+@Composable
+fun TextFieldExpDate(
+    date: MutableState<String?>,
+    modifier: Modifier
+){
+    TextField(
+        value = date.value ?: "",
+        onValueChange = {
+            if (it.length <= 5) {
+                date.value = it
+            }
+        },
+        modifier = modifier,
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = Color.LightGray,
+            errorContainerColor = Color.LightGray,
+            disabledContainerColor = Color.LightGray,
+            unfocusedContainerColor = Color.LightGray,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            errorIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent,
+            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
+            focusedTextColor = MaterialTheme.colorScheme.onBackground,
+            unfocusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
+            errorTextColor = MaterialTheme.colorScheme.onBackground,
+            focusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
+            disabledTextColor = MaterialTheme.colorScheme.onBackground,
+            errorSupportingTextColor = MaterialTheme.colorScheme.onBackground,
+            disabledSupportingTextColor = MaterialTheme.colorScheme.onBackground,
+        ),
+        shape = RectangleShape,
+        visualTransformation = ExpirationVisualTransformation,
+        label = {
+            Text(text = "Exp. Date",
+                style = TextStyle(
+                    fontSize = 14.sp,
+                )
+            )
+        },
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Next,
+            keyboardType = KeyboardType.Number
+        )
+    )
+}
+
+
+object ExpirationVisualTransformation : VisualTransformation {
+    override fun filter(text: AnnotatedString): TransformedText {
+        val transformed = StringBuilder().apply {
+            text.text.filter { it.isDigit() }.forEachIndexed { index, c ->
+                if (index != 0 && index % 2 == 0) {
+                    append('/')
+                }
+                append(c)
+            }
+        }
+        return TransformedText(
+            AnnotatedString(transformed.toString()),
+            ExpirationOffsetMapping(text.text)
+        )
+    }
+}
+
+class ExpirationOffsetMapping(original: String) : OffsetMapping {
+    private val originalToTransformed = calculateMapping(original)
+
+    private fun calculateMapping(original: String): IntArray {
+        val mapping = IntArray(original.length + 1)
+        var transformationOffset = 0
+        original.forEachIndexed { index, char ->
+            if (char.isDigit() && index >= 2) {
+                transformationOffset++
+            }
+            mapping[index] = index + transformationOffset
+        }
+        mapping[original.length] = original.length + transformationOffset
+        return mapping
+    }
+
+    override fun originalToTransformed(offset: Int): Int {
+        return originalToTransformed.getOrElse(offset) { originalToTransformed.last() }
+    }
+
+    override fun transformedToOriginal(offset: Int): Int {
+        val originalOffset = originalToTransformed.indexOf(offset)
+        return if (originalOffset != -1) originalOffset else offset
+    }
+}
+
+@Preview
+@Composable
+fun TextFieldExpDatePrev(){
+    HHBaseTheme {
+        TextFieldExpDate(
+            date = remember { mutableStateOf("0524") },
+            modifier = Modifier
+            )
+    }
+}

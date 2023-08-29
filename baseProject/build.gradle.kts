@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.jmg.baseproject"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -85,6 +85,12 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.video)
+
+
+    //Permissions
+    implementation(libs.accompanist.permissions)
+
 }
 
 publishing{

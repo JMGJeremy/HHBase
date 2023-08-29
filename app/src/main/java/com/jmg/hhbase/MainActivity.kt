@@ -13,10 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import com.jmg.baseproject.accessClasses.auth.*
+import com.jmg.baseproject.camera.VideoScreen
 import com.jmg.baseproject.ui.auth.LoginScreen
 import com.jmg.hhbase.ui.theme.HHBaseTheme
 import com.jmg.baseproject.dialogs.ProgressDialogText
 import com.jmg.baseproject.ui.auth.RegisterScreen
+import com.jmg.baseproject.ui.payment.PaymentScreen
 import retrofit2.Response
 
 class MainActivity : ComponentActivity() {
@@ -43,23 +45,38 @@ class MainActivity : ComponentActivity() {
 //                        response = remember { mutableStateOf(null) }
 //                    )
 
-                    RegisterClass(
-                        baseUrl = "https://sandbox.homeworkhelperapp.org",
-                    ).GetRegisterScreen(
-                        resp = remember { mutableStateOf(null)},
-                        err = remember { mutableStateOf(null)},
-                        first = remember { mutableStateOf("") },
-                        last = remember { mutableStateOf("") },
-                        email = remember { mutableStateOf("") },
-                        pass = remember { mutableStateOf("") },
-                        confirm = remember { mutableStateOf("") },
-                        logoInt = R.drawable.ic_launcher_foreground,
-                        back = {},
-                        optionOne = "Parent",
-                        optionTwo = "Student",
-                        terms = {},
-                        progress = remember { mutableStateOf(false)},
-                        zip = remember { mutableStateOf(null)}
+//                    RegisterClass(
+//                        baseUrl = "https://sandbox.homeworkhelperapp.org",
+//                    ).GetRegisterScreen(
+//                        resp = remember { mutableStateOf(null)},
+//                        err = remember { mutableStateOf(null)},
+//                        first = remember { mutableStateOf("") },
+//                        last = remember { mutableStateOf("") },
+//                        email = remember { mutableStateOf("") },
+//                        pass = remember { mutableStateOf("") },
+//                        confirm = remember { mutableStateOf("") },
+//                        logoInt = R.drawable.ic_launcher_foreground,
+//                        back = {},
+//                        optionOne = "Parent",
+//                        optionTwo = "Student",
+//                        terms = {},
+//                        progress = remember { mutableStateOf(false)},
+//                        zip = remember { mutableStateOf(null)}
+//                    )
+//                }
+
+//                    PaymentScreen(
+//                        addCard = {},
+//                        skippable = true,
+//                        skip = {
+//
+//                        },
+//                        error = remember { mutableStateOf(null) }
+//                    )
+
+                    VideoScreen(
+                        facingFront = true,
+                        onImageCaptured = {uri, b->}
                     )
                 }
             }
