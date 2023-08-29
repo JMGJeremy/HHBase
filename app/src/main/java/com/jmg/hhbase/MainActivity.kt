@@ -20,6 +20,7 @@ import com.jmg.baseproject.dialogs.ProgressDialogText
 import com.jmg.baseproject.ui.auth.RegisterScreen
 import com.jmg.baseproject.ui.payment.PaymentScreen
 import retrofit2.Response
+import kotlin.math.max
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +77,8 @@ class MainActivity : ComponentActivity() {
 
                     VideoScreen(
                         facingFront = true,
-                        onImageCaptured = {uri, b->}
+                        onImageCaptured = {uri, b->},
+                        maxTime = 10000L
                     )
                 }
             }

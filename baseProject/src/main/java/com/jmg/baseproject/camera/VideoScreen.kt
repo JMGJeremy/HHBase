@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.camera.core.CameraSelector
@@ -55,6 +57,7 @@ import java.util.concurrent.Executor
 fun VideoScreen(
     facingFront: Boolean = true,
     onImageCaptured: (Uri, Boolean) -> Unit,
+    maxTime: Long
 ) {
     val TAG = "VideoScreen"
     val context = LocalContext.current
@@ -131,7 +134,6 @@ fun VideoScreen(
                             if (mediaDir != null) {
                                 recording = startVideoRecording(
                                     context = context,
-                                    fileNameFormat = "yyyy/mm/dd",
                                     videoCapture = videoCapture,
                                     outputDirectory = mediaDir,
                                     executor = ContextCompat.getMainExecutor(context),
@@ -154,7 +156,13 @@ fun VideoScreen(
                                         }
                                     }
                                 }
-                                Log.e(TAG, "recording = $recording")
+
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    recordingStart.value = false
+                                    recording?.stop()
+                                    recording = null
+                                    Toast.makeText(context, "Stopped", Toast.LENGTH_LONG).show()
+                                }, maxTime)
                             }else{
                                 Toast.makeText(context, "dir null", Toast.LENGTH_LONG).show()
                             }
@@ -223,7 +231,6 @@ suspend fun Context.createVideoCaptureUseCase(
 @SuppressLint("MissingPermission")
 fun startVideoRecording(
     context: Context,
-    fileNameFormat: String,
     videoCapture: VideoCapture<Recorder>,
     outputDirectory: File,
     executor: Executor,
