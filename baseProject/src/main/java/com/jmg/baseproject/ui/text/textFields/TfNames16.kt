@@ -51,7 +51,7 @@ fun TfNames16(
                 shape = RoundedCornerShape(50)
             ),
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color.Gray,
+            textColor = MaterialTheme.colorScheme.onBackground,
             focusedIndicatorColor = Color.Transparent,
             errorIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,

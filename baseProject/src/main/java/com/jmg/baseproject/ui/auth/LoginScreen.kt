@@ -55,9 +55,9 @@ fun LoginScreen(
     modifier = Modifier
         .fillMaxSize()
         .background(color = MaterialTheme.colorScheme.background)
-        .padding(horizontal = 36.dp),
+        .padding(horizontal = 36.dp)
+        .verticalScroll(scroll),
     horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
     ) {
 
         Logo(
@@ -69,7 +69,6 @@ fun LoginScreen(
 
         Column(
             modifier = Modifier
-                .verticalScroll(scroll)
         ) {
 
             TfEmail(
@@ -116,7 +115,7 @@ fun LoginScreen(
                         }
                     }
                 },
-                text = "Submit",
+                text = "Login",
                 textStyle = MaterialTheme.typography.bodyMedium
             )
 

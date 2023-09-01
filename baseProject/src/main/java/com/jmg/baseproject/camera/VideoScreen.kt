@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
 import androidx.camera.video.FallbackStrategy
@@ -20,26 +19,34 @@ import androidx.camera.video.Recording
 import androidx.camera.video.VideoCapture
 import androidx.camera.video.VideoRecordEvent
 import androidx.camera.view.PreviewView
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.util.Consumer
 import androidx.lifecycle.LifecycleOwner
@@ -47,6 +54,8 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.jmg.baseproject.HHBaseTheme
 import com.jmg.baseproject.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -86,12 +95,24 @@ fun VideoScreen(
     )
 
     var recording: Recording? = remember { null }
+
+    var time by remember { mutableIntStateOf(0) }
     val previewView : PreviewView = remember { PreviewView(context) }
     var videoCapture: MutableState<VideoCapture<Recorder>?> = remember { mutableStateOf(null)}
     var recordingStart = remember { mutableStateOf(false)}
-    val audioEnable = remember { mutableStateOf(false)}
+    val audioEnable = remember { mutableStateOf(true)}
     val cameraSelector = remember {
         mutableStateOf(CameraSelector.DEFAULT_FRONT_CAMERA)
+    }
+    LaunchedEffect(recordingStart.value){
+        if (recordingStart.value) {
+            val job = launch {
+                while (true) {
+                    time++
+                    delay(1000)
+                }
+            }
+        }
     }
 
     LaunchedEffect(Unit){
@@ -109,21 +130,58 @@ fun VideoScreen(
     }
 
     if (permissionsApproved){
-        Box(
+        ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
         ){
+            val (topBar, camera, controls) = createRefs()
+
             AndroidView(
                 factory = {
                     previewView
                 },
                 modifier = Modifier
                     .fillMaxSize()
+                    .constrainAs(camera) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        end.linkTo(parent.end)
+                    }
             )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color.Black)
+                    .constrainAs(topBar) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    },
+                horizontalArrangement = Arrangement.Center
+            ){
+                Text(
+                    text = if (time < 10){
+                        "00:0${time}"
+                    }else{
+                         "00:${time}"
+                         },
+                    modifier = Modifier
+                        .padding(vertical = 4.dp)
+                        .background(color = if(recordingStart.value){
+                            Color.Red
+                        }else{
+                            Color.Transparent
+                        }
+                        ),
+                    color = Color.White
+                    )
+            }
+
             IconButton(
                 onClick = {
                     if (!recordingStart.value) {
-                        Toast.makeText(context, "start", Toast.LENGTH_LONG).show()
                         videoCapture.value?.let { videoCapture ->
                             recordingStart.value = true
                             val mediaDir = context.getExternalFilesDir(null)?.let {
@@ -139,7 +197,6 @@ fun VideoScreen(
                                     executor = ContextCompat.getMainExecutor(context),
                                     audioEnable = audioEnable.value
                                 ) { event ->
-                                    Log.e(TAG, "event = $event")
                                     if (event is VideoRecordEvent.Finalize) {
                                         val uri = event.outputResults.outputUri
                                         Log.e(
@@ -161,30 +218,58 @@ fun VideoScreen(
                                     recordingStart.value = false
                                     recording?.stop()
                                     recording = null
-                                    Toast.makeText(context, "Stopped", Toast.LENGTH_LONG).show()
                                 }, maxTime)
-                            }else{
-                                Toast.makeText(context, "dir null", Toast.LENGTH_LONG).show()
                             }
                             Log.e(TAG, "recording = $recording")
                         }
 
                     } else {
-                        Toast.makeText(context, "stop", Toast.LENGTH_LONG).show()
                         recordingStart.value = false
                         recording?.stop()
                     }
                 },
                 modifier = Modifier
-                    .align(Alignment.BottomStart)
+                    .constrainAs(controls) {
+                        bottom.linkTo(camera.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
                     .padding(bottom = 16.dp),
                 content = {
-                    Image(
-                        painter = painterResource(R.drawable.bars),
-                        contentDescription = null,
+
+                    Row(
                         modifier = Modifier
-                            .size(36.dp)
-                    )
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                            Row(
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .border(
+                                        width = 2.dp,
+                                        color = MaterialTheme.colorScheme.background,
+                                        shape = CircleShape
+                                    )
+                            ) {
+                                if (!recordingStart.value) {
+                                    Row(
+                                        modifier = Modifier
+                                            .padding(6.dp)
+                                            .fillMaxSize()
+                                            .background(color = Color.Red, shape = CircleShape)
+                                    ) {}
+                                }else{
+                                    Row(
+                                        modifier = Modifier
+                                            .padding(12.dp)
+                                            .fillMaxSize()
+                                            .background(color = Color.Red, shape = RectangleShape)
+                                    ){
+
+                                    }
+                                }
+                            }
+                    }
                 }
             )
         }
@@ -218,7 +303,7 @@ suspend fun Context.createVideoCaptureUseCase(
     val videoCapture = VideoCapture.withOutput(recorder)
 
     val cameraProvider = getCameraProvider()
-//    cameraProvider.unbindAll()
+    cameraProvider.unbindAll()
     cameraProvider.bindToLifecycle(
         lifeCycleOwner,
         CameraSelector.DEFAULT_FRONT_CAMERA,

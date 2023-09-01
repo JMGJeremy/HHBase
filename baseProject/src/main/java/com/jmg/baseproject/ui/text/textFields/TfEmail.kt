@@ -48,7 +48,7 @@ fun TfEmail(
         modifier = modifier
             .height(60.dp),
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color.Gray,
+            textColor = MaterialTheme.colorScheme.onBackground,
             focusedIndicatorColor = Color.Transparent,
             errorIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,

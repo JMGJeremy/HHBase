@@ -314,7 +314,7 @@ fun RegisterScreen(
                         }
                     }
                 },
-                text = "Submit",
+                text = "Create Account",
                 textStyle = TextStyle(
                     color = MaterialTheme.colorScheme.background
                 ),
