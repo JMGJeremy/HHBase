@@ -91,6 +91,10 @@ dependencies {
     //Permissions
     implementation(libs.accompanist.permissions)
 
+    // ExoPlayer
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+
 }
 
 publishing{

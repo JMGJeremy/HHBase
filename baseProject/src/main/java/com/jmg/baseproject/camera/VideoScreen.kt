@@ -126,6 +126,7 @@ fun VideoScreen(
             previewView = previewView,
             context = context
         )
+        
         Log.e(TAG, "video capture = ${videoCapture.value}")
     }
 
@@ -289,10 +290,9 @@ suspend fun Context.createVideoCaptureUseCase(
         .apply{
             setSurfaceProvider(previewView.surfaceProvider)
         }
-    Log.e(TAG, "preview = $preview")
     val qualitySelector = QualitySelector.from(
         Quality.SD,
-        FallbackStrategy.lowerQualityOrHigherThan(Quality.SD)
+        FallbackStrategy.lowerQualityThan(Quality.SD)
     )
 
     val recorder = Recorder.Builder()
@@ -300,7 +300,8 @@ suspend fun Context.createVideoCaptureUseCase(
         .setQualitySelector(qualitySelector)
         .build()
 
-    val videoCapture = VideoCapture.withOutput(recorder)
+    val videoCapture = VideoCapture
+        .withOutput(recorder)
 
     val cameraProvider = getCameraProvider()
     cameraProvider.unbindAll()
