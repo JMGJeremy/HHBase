@@ -7,6 +7,7 @@ import com.jmg.baseproject.models.auth.*
 import com.jmg.baseproject.networking.ApiService
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.HttpException
 import retrofit2.Response
 
 
@@ -17,31 +18,17 @@ class BaseLoginViewModel(baseUrl: String): ViewModel() {
     private val service = ApiService.getInstance(baseUrl = baseUrl)
 
 
-    fun loginUser(
+    suspend fun loginUser(
         email: String,
-        password: String,
-        response: MutableState<Response<Any?>?>,
-        error: MutableState<String?>
-    ){
+        password: String
+    ): Response<LoginResponse?>{
         val login = LoginApi(
             email = email,
             password = password,
             grantType = "password"
         )
         Log.e(TAG, "login = $login")
-        service.loginUser(
-            login = login
-        ).enqueue(object: Callback<Any?> {
-            override fun onResponse(call: Call<Any?>, r: Response<Any?>) {
-                response.value = r
-                Log.e(TAG, "Base login response = ${response.value?.body()} + $r")
-            }
-
-            override fun onFailure(call: Call<Any?>, t: Throwable) {
-                error.value = t.localizedMessage
-                Log.e(TAG, "Base login response error = ${error.value} + $t")
-            }
-        })
+        return service.loginUser(login = login)
     }
 
     fun registerUser(

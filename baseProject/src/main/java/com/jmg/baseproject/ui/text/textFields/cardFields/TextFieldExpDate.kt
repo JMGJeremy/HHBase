@@ -28,10 +28,35 @@ fun TextFieldExpDate(
     date: MutableState<String?>,
     modifier: Modifier
 ){
+    fun formatExpDate(text: AnnotatedString): TransformedText {
+
+        val trimmed = if (text.text.length >= 6) text.text.substring(0..5) else text.text
+        var out = ""
+
+        for (i in trimmed.indices) {
+            out += trimmed[i]
+            if (i == 1) out += "/"
+        }
+        val creditCardOffsetTranslator = object : OffsetMapping {
+            override fun originalToTransformed(offset: Int): Int {
+                if (offset <= 1) return offset
+                if (offset <= 6) return offset + 1
+                return 7
+            }
+
+            override fun transformedToOriginal(offset: Int): Int {
+                if (offset <= 1) return offset
+                if (offset <= 6) return offset - 1
+                return 6
+            }
+        }
+
+        return TransformedText(AnnotatedString(out), creditCardOffsetTranslator)
+    }
     TextField(
         value = date.value ?: "",
         onValueChange = {
-            if (it.length <= 5) {
+            if (it.length <= 4) {
                 date.value = it
             }
         },
@@ -55,7 +80,9 @@ fun TextFieldExpDate(
             disabledSupportingTextColor = MaterialTheme.colorScheme.onBackground,
         ),
         shape = RectangleShape,
-        visualTransformation = ExpirationVisualTransformation,
+        visualTransformation = {
+            formatExpDate(text = it)
+                               },
         label = {
             Text(text = "Exp. Date",
                 style = TextStyle(

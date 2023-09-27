@@ -44,7 +44,6 @@ fun TfNames16(
             value.value = it
         },
         modifier = modifier
-            .height(60.dp)
             .border(
                 width = 1.dp,
                 color = Color.Transparent,
@@ -63,16 +62,16 @@ fun TfNames16(
             focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
             unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
         ),
-        label = {
-            Text(text = label,
-                style = TextStyle(
-                    color = Color.Gray,
-                    fontSize = 16.sp
-                ),
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
-        },
+//        label = {
+//            Text(text = label,
+//                style = TextStyle(
+//                    color = Color.Gray,
+//                    fontSize = 16.sp
+//                ),
+//                overflow = TextOverflow.Ellipsis,
+//                maxLines = 1
+//            )
+//        },
         keyboardOptions = keyboardOptions,
         maxLines = 1,
         keyboardActions = keyboardActions
@@ -82,7 +81,7 @@ fun TfNames16(
         trailingIcon = trailingIcon,
         shape = RoundedCornerShape(50),
         textStyle = TextStyle(
-            fontSize = 18.sp
+            fontSize = 16.sp
         )
     )
 

@@ -35,7 +35,7 @@ import com.jmg.baseproject.ui.text.textFields.cardFields.TextFieldZip
 
 @Composable
 fun PaymentScreen(
-    addCard:()->Unit,
+    addCard:(String, String, String, String)->Unit,
     skippable: Boolean = false,
     skip: ()->Unit,
     error: MutableState<String?>
@@ -120,7 +120,7 @@ fun PaymentScreen(
                     date.value.isNullOrEmpty() -> error.value = "Enter your expiration date"
                     cvv.value.isNullOrEmpty() -> error.value = "Enter your CVV"
                     zip.value.isNullOrEmpty() -> error.value = "Enter your zip code"
-                    else -> addCard.invoke()
+                    else -> addCard.invoke(cardNumber.value ?: "", cvv.value ?: "", date.value ?: "", zip.value ?: "")
                 }
 
                     },
@@ -141,7 +141,7 @@ fun PaymentScreen(
 fun PaymentPrev(){
     HHBaseTheme {
         PaymentScreen(
-            addCard = {
+            addCard = { cardNum, cvv, date, zip->
 
             },
             skippable = true,

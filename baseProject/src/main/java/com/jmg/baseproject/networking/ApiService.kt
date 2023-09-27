@@ -1,8 +1,11 @@
 package com.jmg.baseproject.networking
 
+import com.jmg.baseproject.models.auth.LoginResponse
 import com.jmg.baseproject.models.auth.LoginApi
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -22,9 +25,9 @@ interface ApiService {
     ): Call<Any?>
 
     @POST("oauth/token.json")
-    fun loginUser(
+    suspend fun loginUser(
         @Body login: LoginApi
-    ):Call<Any?>
+    ): Response<LoginResponse?>
 
     @POST("oauth/token.json")
     fun refreshToken(
@@ -44,6 +47,7 @@ interface ApiService {
                     .baseUrl(baseUrl)
                     .client(ApiClient.httpClient)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
                     .create(ApiService::class.java)
             }

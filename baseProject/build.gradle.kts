@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     id("maven-publish")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -42,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 }
 
@@ -77,6 +78,12 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation (libs.logging.interceptor)
+    implementation(libs.adapter.rxjava2)
+
+    //Room
+    implementation (libs.androidx.room.ktx)
+    implementation (libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 
     //Camera
 
