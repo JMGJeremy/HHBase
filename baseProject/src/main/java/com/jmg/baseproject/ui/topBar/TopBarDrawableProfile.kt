@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
@@ -52,7 +53,8 @@ fun TopBarDrawableProfile(
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 }
-                .clickable { btnClick.invoke() }
+                .clickable { btnClick.invoke() },
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseSurface)
         )
 
         TV22B700(
@@ -86,7 +88,8 @@ fun TopBarDrawableProfile(
                 contentDescription = null,
                 modifier = Modifier
                     .size(22.dp, 22.dp),
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.Fit,
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseSurface)
             )
         }
         

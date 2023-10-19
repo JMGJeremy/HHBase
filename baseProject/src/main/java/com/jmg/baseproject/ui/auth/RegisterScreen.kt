@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
@@ -48,6 +49,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jmg.baseproject.HHBaseTheme
 import com.jmg.baseproject.R
 import com.jmg.baseproject.ui.images.Logo
@@ -78,12 +80,35 @@ fun RegisterScreen(
     progress: MutableState<Boolean>
 ){
 
-    val context = LocalContext.current
-    val terms = remember { mutableStateOf(false) }
-    val progress = remember { mutableStateOf(false) }
-    val keyboard = LocalSoftwareKeyboardController.current
-
     val passwordVis = remember { mutableStateOf<Boolean>(true)}
+
+    fun registerUser(){
+        when (true) {
+            firstName.value.isNullOrEmpty() -> {
+                errorText.value = "Please enter your first name."
+            }
+
+            lastName.value.isNullOrEmpty() -> {
+                errorText.value = "Please enter your last name."
+            }
+
+            email.value.isNullOrEmpty() -> {
+                errorText.value = "Please enter your email."
+            }
+
+            password.value.isNullOrEmpty() -> {
+                errorText.value = "Please enter your password."
+            }
+
+//            confirm.value.isNullOrEmpty() -> {
+//                errorText.value = "Please enter your password confirmation."
+//            }
+            else -> {
+                progress.value = true
+                register.invoke()
+            }
+        }
+    }
 
     val mod = Modifier
         .fillMaxWidth()
@@ -102,7 +127,8 @@ fun RegisterScreen(
     val termsString = buildAnnotatedString {
         addStringAnnotation(tag = "text", annotation = "", start = 0, end = 5)
         withStyle(style = SpanStyle(
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 12.sp
         )
         ){
             append("By clicking the create account button, I agree to the ")
@@ -111,6 +137,7 @@ fun RegisterScreen(
         withStyle(style = SpanStyle(
             textDecoration = TextDecoration.Underline,
             color = MaterialTheme.colorScheme.primary,
+            fontSize = 12.sp
         )
         ){
             append("Terms of Service")
@@ -237,18 +264,6 @@ fun RegisterScreen(
                 modifier = mod
             )
 
-            TfEmail(
-                value = email,
-                label = "Email",
-                keyboardOptions = KeyboardOptions(
-                    capitalization = KeyboardCapitalization.Words,
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Next
-                ),
-                modifier = mod,
-                focusDirection = FocusDirection.Down
-            )
-
             TfNames16(
                 value = zip,
                 label = "Zip Code",
@@ -261,20 +276,46 @@ fun RegisterScreen(
 
             }
 
+            TfNames16(
+                value = email,
+                label = "Email",
+                keyboardOptions = KeyboardOptions(
+                    capitalization = KeyboardCapitalization.Words,
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                modifier = mod,
+            )
+
             TfPass(
                 input = password,
                 passwordVisible = passwordVis,
                 textColor = MaterialTheme.colorScheme.onPrimary,
-                focusDirection = FocusDirection.Next,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        registerUser()
+                    }
+                ),
+                label = "Password"
             )
 
 
-            TfPass(
-                input = confirm,
-                passwordVisible = passwordVis,
-                textColor = MaterialTheme.colorScheme.onPrimary,
-                focusDirection = FocusDirection.Down,
-            )
+//            TfPass(
+//                input = confirm,
+//                passwordVisible = passwordVis,
+//                textColor = MaterialTheme.colorScheme.onPrimary,
+//                keyboardOptions = KeyboardOptions(
+//                    imeAction = ImeAction.Done
+//                ),
+//                keyboardActions = KeyboardActions(
+//                    onDone = {
+//                        registerUser()
+//                    }
+//                )
+//            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -282,37 +323,7 @@ fun RegisterScreen(
         Column() {
             B18PrimaryBodyMedRound(
                 click = {
-                    when (true) {
-                        firstName.value.isNullOrEmpty() -> {
-                            errorText.value = "Please enter your first name."
-                        }
-
-                        lastName.value.isNullOrEmpty() -> {
-                            errorText.value = "Please enter your last name."
-                        }
-
-                        email.value.isNullOrEmpty() -> {
-                            errorText.value = "Please enter your email."
-                        }
-
-                        password.value.isNullOrEmpty() -> {
-                            errorText.value = "Please enter your password."
-                        }
-
-                        confirm.value.isNullOrEmpty() -> {
-                            errorText.value = "Please enter your password confirmation."
-                        }
-
-//                        !terms.value -> {
-//                            errorText.value =
-//                                "Please review our Terms and Conditions and accept before continuing."
-//                        }
-
-                        else -> {
-                            progress.value = true
-                            register.invoke()
-                        }
-                    }
+                    registerUser()
                 },
                 text = "Create Account",
                 textStyle = TextStyle(
@@ -328,7 +339,7 @@ fun RegisterScreen(
                 text = termsString,
                 onClick = {
                     progress.value = true
-                          termsClick.invoke()
+                    termsClick.invoke()
                 },
                 modifier = Modifier
                     .padding(vertical = 16.dp, horizontal = 24.dp),

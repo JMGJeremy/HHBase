@@ -2,8 +2,10 @@ package com.jmg.baseproject.ui.text.textFields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -32,53 +34,58 @@ fun TfEmail(
     label: String,
     modifier: Modifier,
     keyboardOptions: KeyboardOptions,
-    keyboardActions: KeyboardActions? = null,
-    trailingIcon: @Composable ()->Unit = {},
-    focusDirection: FocusDirection
+    keyboardActions: KeyboardActions,
+    trailingIcon: @Composable ()->Unit = {}
 ){
 
     val focus = LocalFocusManager.current
 
-    TextField(
-        value = value.value ?: "",
-        singleLine = true,
-        onValueChange = {
-            value.value = it
-        },
+    Column(
         modifier = modifier
-            .height(60.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = MaterialTheme.colorScheme.onBackground,
-            focusedIndicatorColor = Color.Transparent,
-            errorIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colorScheme.onPrimary,
-            backgroundColor = Color.LightGray,
-            disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
-            errorLabelColor = MaterialTheme.colorScheme.onPrimary,
-            focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
-        ),
-        label = {
-            Text(text = label,
-                style = TextStyle(
-                    color = Color.Gray,
-                    fontSize = 16.sp
-                ),
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
-        },
-        keyboardOptions = keyboardOptions,
-        maxLines = 1,
-        keyboardActions = keyboardActions
-            ?: KeyboardActions(
-                onNext = { focus.moveFocus(focusDirection) }
+    ) {
+        Text(text = label,
+            modifier = Modifier
+                .padding(bottom = 4.dp))
+        TextField(
+            value = value.value ?: "",
+            singleLine = true,
+            onValueChange = {
+                value.value = it
+            },
+            modifier = Modifier
+                .height(60.dp)
+                .fillMaxWidth(),
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = MaterialTheme.colorScheme.onBackground,
+                focusedIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                cursorColor = MaterialTheme.colorScheme.onPrimary,
+                backgroundColor = Color.LightGray,
+                disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
+                errorLabelColor = MaterialTheme.colorScheme.onPrimary,
+                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
             ),
-        trailingIcon = trailingIcon,
-        shape = RoundedCornerShape(50)
-    )
+//            label = {
+//                Text(
+//                    text = label,
+//                    style = TextStyle(
+//                        color = Color.Gray,
+//                        fontSize = 16.sp
+//                    ),
+//                    overflow = TextOverflow.Ellipsis,
+//                    maxLines = 1
+//                )
+//            },
+            keyboardOptions = keyboardOptions,
+            maxLines = 1,
+            keyboardActions = keyboardActions,
+            trailingIcon = trailingIcon,
+            shape = RoundedCornerShape(50)
+        )
+    }
 
 }
 
@@ -93,7 +100,7 @@ fun LoginTextFieldPreview(){
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(),
             trailingIcon = {},
-            focusDirection = FocusDirection.Next
+            keyboardActions = KeyboardActions()
         )
     }
 

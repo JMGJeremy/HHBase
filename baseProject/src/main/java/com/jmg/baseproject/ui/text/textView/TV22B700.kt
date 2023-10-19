@@ -1,5 +1,6 @@
 package com.jmg.baseproject.ui.text.textView
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,7 +18,8 @@ fun TV22B700(
         text = text,
         modifier = modifier,
         fontSize = 22.sp,
-        fontWeight = FontWeight(700)
+        fontWeight = FontWeight(700),
+        color = MaterialTheme.colorScheme.inverseSurface
     )
 }
 @Composable

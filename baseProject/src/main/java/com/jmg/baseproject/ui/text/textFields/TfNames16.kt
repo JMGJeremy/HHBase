@@ -1,8 +1,10 @@
 package com.jmg.baseproject.ui.text.textFields
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -36,32 +38,41 @@ fun TfNames16(
 ){
 
     val focus = LocalFocusManager.current
-
-    TextField(
-        value = value.value ?: "",
-        singleLine = true,
-        onValueChange = {
-            value.value = it
-        },
+    Column(
         modifier = modifier
             .border(
                 width = 1.dp,
                 color = Color.Transparent,
                 shape = RoundedCornerShape(50)
+            )
+    ) {
+        Text(text = label,
+            modifier = Modifier
+                .padding(bottom = 4.dp),
+            color = MaterialTheme.colorScheme.inverseSurface
+            )
+
+        TextField(
+            value = value.value ?: "",
+            singleLine = true,
+            onValueChange = {
+                value.value = it
+            },
+            modifier = Modifier
+                .fillMaxWidth(),
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = MaterialTheme.colorScheme.onBackground,
+                focusedIndicatorColor = Color.Transparent,
+                errorIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                cursorColor = MaterialTheme.colorScheme.onPrimary,
+                backgroundColor = Color.LightGray,
+                disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
+                errorLabelColor = MaterialTheme.colorScheme.onPrimary,
+                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
             ),
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = MaterialTheme.colorScheme.onBackground,
-            focusedIndicatorColor = Color.Transparent,
-            errorIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = MaterialTheme.colorScheme.onPrimary,
-            backgroundColor = Color.LightGray,
-            disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
-            errorLabelColor = MaterialTheme.colorScheme.onPrimary,
-            focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-            unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
-        ),
 //        label = {
 //            Text(text = label,
 //                style = TextStyle(
@@ -72,18 +83,19 @@ fun TfNames16(
 //                maxLines = 1
 //            )
 //        },
-        keyboardOptions = keyboardOptions,
-        maxLines = 1,
-        keyboardActions = keyboardActions
-            ?: KeyboardActions(
-                onNext = { focus.moveFocus(FocusDirection.Next) }
-            ),
-        trailingIcon = trailingIcon,
-        shape = RoundedCornerShape(50),
-        textStyle = TextStyle(
-            fontSize = 16.sp
+            keyboardOptions = keyboardOptions,
+            maxLines = 1,
+            keyboardActions = keyboardActions
+                ?: KeyboardActions(
+                    onNext = { focus.moveFocus(FocusDirection.Next) }
+                ),
+            trailingIcon = trailingIcon,
+            shape = RoundedCornerShape(50),
+            textStyle = TextStyle(
+                fontSize = 16.sp
+            )
         )
-    )
+    }
 
 }
 

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -24,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -50,6 +53,19 @@ fun LoginScreen(
 
     val context = LocalContext.current
     val scroll = rememberScrollState()
+    val focus = LocalFocusManager.current
+
+    fun loginUser(){
+        when(true){
+            email.value.isNullOrEmpty() -> {error.value = "Please enter your email"}
+            !(email.value?.contains("@") == true && email.value?.contains(".") == true)-> {error.value = "Email is malformed"}
+            password.value.isNullOrEmpty() -> { error.value = "Please enter your password"}
+            else -> {
+                progress.value = true
+                login.invoke()
+            }
+        }
+    }
 
     Column(
     modifier = Modifier
@@ -67,30 +83,42 @@ fun LoginScreen(
                 .height(300.dp)
         )
 
+
         Column(
             modifier = Modifier
+                .fillMaxWidth()
         ) {
 
             TfEmail(
                 value = email,
                 label = "Email Address",
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
                 ),
-                focusDirection = FocusDirection.Next
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focus.moveFocus(FocusDirection.Down)
+                    }
+                )
             )
 
             TfPass(
                 input = password,
                 passwordVisible = passwordVis,
                 textColor = Color.Gray,
-                focusDirection = FocusDirection.Next,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
                     ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        loginUser()
+                    }
+                ),
+                label = "Password"
             )
         }
 
@@ -105,15 +133,7 @@ fun LoginScreen(
 
             B18PrimaryBodyMedRound(
                 click = {
-                    when(true){
-                        email.value.isNullOrEmpty() -> {error.value = "Please enter your email"}
-                        !(email.value?.contains("@") == true && email.value?.contains(".") == true)-> {error.value = "Email is malformed"}
-                        password.value.isNullOrEmpty() -> { error.value = "Please enter your password"}
-                        else -> {
-                            progress.value = true
-                            login.invoke()
-                        }
-                    }
+                    loginUser()
                 },
                 text = "Login",
                 textStyle = MaterialTheme.typography.bodyMedium
