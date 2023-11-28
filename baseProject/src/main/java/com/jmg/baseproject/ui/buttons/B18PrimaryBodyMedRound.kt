@@ -30,8 +30,8 @@ fun B18PrimaryBodyMedRound(
     Button(
         modifier = modifier
             .clickable { click.invoke() }
-            .padding(top = 16.dp)
-            .height(50.dp)
+//            .padding(top = 16.dp)
+//            .height(28.dp)
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(50)),
         enabled = enabled,
@@ -45,7 +45,6 @@ fun B18PrimaryBodyMedRound(
     ){
         Text(text = text,
             style = textStyle,
-
         )
     }
 }

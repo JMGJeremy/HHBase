@@ -1,35 +1,50 @@
 package com.jmg.hhbase.ui.theme
 
 import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = HHHPrimaryColor,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = ButtonBackground,
+    onPrimary = Color.White,
+    secondary = PurpleGrey40,
+    tertiary = Pink40,
+    background = BackgroundColorBlackish,
+    onBackground = Color.LightGray,
+    surface = Color.White,
+    onSurface = Color.LightGray,
+    inverseOnSurface = LightGray,
+    inverseSurface = Color.Black,
+    tertiaryContainer = Color.Gray,
+    surfaceVariant = Color(android.graphics.Color.parseColor("#1C1C1C")),
+    onSurfaceVariant = DarkGray,
+    surfaceTint = DarkGray
+
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = ButtonBackground,
-    onPrimary = Color.Black,
+    onPrimary = Color.White,
     secondary = PurpleGrey40,
     tertiary = Pink40,
-    background = LightGray,
+    background = BackgroundColorWhitish,
     onBackground = Color.Black,
-    surface = Color.Gray
+    surface = Color.White,
+    onSurface = Color.LightGray,
+    tertiaryContainer = Color.Gray,
+    inverseOnSurface = Color.Black,
+    inverseSurface = LightGray,
+    surfaceVariant = Color.LightGray,
+    onSurfaceVariant = LightGray,
+    surfaceTint = Color.White
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -43,7 +58,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun HHBaseTheme(
+fun HomeworkHelperHotlineTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
@@ -55,7 +70,7 @@ fun HHBaseTheme(
 //            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
 //        }
 //
-//        darkTheme -> DarkColorScheme
+        darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
     val view = LocalView.current

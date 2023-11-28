@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.TextField
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.jmg.baseproject.DroidFontFamily
 import com.jmg.baseproject.HHBaseTheme
 
 @Composable
@@ -45,29 +47,38 @@ fun TfEmail(
     ) {
         Text(text = label,
             modifier = Modifier
-                .padding(bottom = 4.dp))
-        TextField(
+                .padding(bottom = 4.dp),
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 14.sp
+            )
+        BasicTextField(
             value = value.value ?: "",
-            singleLine = true,
+//            singleLine = true,
             onValueChange = {
                 value.value = it
             },
             modifier = Modifier
-                .height(60.dp)
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = MaterialTheme.colorScheme.onBackground,
-                focusedIndicatorColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                cursorColor = MaterialTheme.colorScheme.onPrimary,
-                backgroundColor = Color.LightGray,
-                disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
-                errorLabelColor = MaterialTheme.colorScheme.onPrimary,
-                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.inverseSurface, shape = RoundedCornerShape(50))
+                .padding(horizontal = 8.dp, vertical = 8.dp),
+            textStyle = TextStyle(
+                fontFamily = DroidFontFamily,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground
             ),
+//            colors = TextFieldDefaults.textFieldColors(
+//                textColor = MaterialTheme.colorScheme.background,
+//                focusedIndicatorColor = Color.Transparent,
+//                errorIndicatorColor = Color.Transparent,
+//                disabledIndicatorColor = Color.Transparent,
+//                unfocusedIndicatorColor = Color.Transparent,
+//                cursorColor = MaterialTheme.colorScheme.onPrimary,
+//                backgroundColor = Color.LightGray,
+//                disabledLabelColor = MaterialTheme.colorScheme.background,
+//                errorLabelColor = MaterialTheme.colorScheme.background,
+//                focusedLabelColor = MaterialTheme.colorScheme.background,
+//                unfocusedLabelColor = MaterialTheme.colorScheme.background
+//            ),
 //            label = {
 //                Text(
 //                    text = label,
@@ -82,8 +93,8 @@ fun TfEmail(
             keyboardOptions = keyboardOptions,
             maxLines = 1,
             keyboardActions = keyboardActions,
-            trailingIcon = trailingIcon,
-            shape = RoundedCornerShape(50)
+//            trailingIcon = trailingIcon,
+//            shape = RoundedCornerShape(50)
         )
     }
 

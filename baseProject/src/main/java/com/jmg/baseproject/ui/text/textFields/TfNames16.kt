@@ -1,11 +1,13 @@
 package com.jmg.baseproject.ui.text.textFields
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.TextField
@@ -49,51 +51,31 @@ fun TfNames16(
         Text(text = label,
             modifier = Modifier
                 .padding(bottom = 4.dp),
-            color = MaterialTheme.colorScheme.inverseSurface
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 14.sp
             )
 
-        TextField(
+        BasicTextField(
             value = value.value ?: "",
             singleLine = true,
             onValueChange = {
                 value.value = it
             },
-            modifier = Modifier
-                .fillMaxWidth(),
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = MaterialTheme.colorScheme.onBackground,
-                focusedIndicatorColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                cursorColor = MaterialTheme.colorScheme.onPrimary,
-                backgroundColor = Color.LightGray,
-                disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
-                errorLabelColor = MaterialTheme.colorScheme.onPrimary,
-                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-            ),
-//        label = {
-//            Text(text = label,
-//                style = TextStyle(
-//                    color = Color.Gray,
-//                    fontSize = 16.sp
-//                ),
-//                overflow = TextOverflow.Ellipsis,
-//                maxLines = 1
-//            )
-//        },
             keyboardOptions = keyboardOptions,
             maxLines = 1,
             keyboardActions = keyboardActions
                 ?: KeyboardActions(
                     onNext = { focus.moveFocus(FocusDirection.Next) }
                 ),
-            trailingIcon = trailingIcon,
-            shape = RoundedCornerShape(50),
             textStyle = TextStyle(
-                fontSize = 16.sp
-            )
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onBackground
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp)
+                .background(color = MaterialTheme.colorScheme.inverseSurface, shape = RoundedCornerShape(50))
+                .padding(horizontal = 8.dp, vertical = 8.dp)
         )
     }
 

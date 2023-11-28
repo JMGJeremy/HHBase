@@ -108,7 +108,7 @@ fun LoginScreen(
             TfPass(
                 input = password,
                 passwordVisible = passwordVis,
-                textColor = Color.Gray,
+                textColor = MaterialTheme.colorScheme.onBackground,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done

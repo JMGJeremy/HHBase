@@ -1,5 +1,6 @@
 package com.jmg.baseproject.ui.text.textFields
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.TextField
@@ -34,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.guru.fontawesomecomposelib.FaIcon
 import com.guru.fontawesomecomposelib.FaIcons
+import com.jmg.baseproject.DroidFontFamily
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -61,61 +64,33 @@ fun TfPass(
     Column(
         modifier = modifier
     ) {
-        Text(text = label)
+        Text(
+            text = label,
+            fontSize = 14.sp,
+            color = MaterialTheme.colorScheme.onBackground
+        )
 
-        TextField(
+        BasicTextField(
             value = input.value ?: "",
             onValueChange = {
                 input.value = it
             },
             modifier = Modifier
-                .height(60.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.inverseSurface, shape = RoundedCornerShape(50))
+                .padding(horizontal = 8.dp, vertical = 8.dp),
             visualTransformation = if (passwordVisible.value) {
                 PasswordVisualTransformation()
             } else {
                 VisualTransformation.None
             },
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = MaterialTheme.colorScheme.onBackground,
-                focusedIndicatorColor = Color.Transparent,
-                errorIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                cursorColor = MaterialTheme.colorScheme.onPrimary,
-                backgroundColor = Color.LightGray,
-                disabledLabelColor = MaterialTheme.colorScheme.onPrimary,
-                errorLabelColor = MaterialTheme.colorScheme.onPrimary,
-                focusedLabelColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
+            textStyle = TextStyle(
+                fontFamily = DroidFontFamily,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onPrimary
             ),
-            trailingIcon = {
-                if (passwordVisible.value) {
-                    FaIcon(
-                        faIcon = FaIcons.EyeSlash,
-                        modifier = Modifier
-                            .clickable {
-                                passwordVisible.value = !passwordVisible.value
-                            },
-                        tint = Color.Gray
-                    )
-                } else {
-                    FaIcon(
-                        faIcon = FaIcons.EyeRegular,
-                        modifier = Modifier
-                            .clickable {
-                                passwordVisible.value = !passwordVisible.value
-                            },
-                        tint = Color.Gray
-                    )
-                }
-            },
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
-            shape = RoundedCornerShape(50),
-            textStyle = TextStyle(
-                fontSize = 18.sp
-            ),
             maxLines = 1
         )
     }

@@ -174,10 +174,9 @@ fun RegisterScreen(
                 .padding(horizontal = 24.dp)
                 .height(36.dp)
                 .background(
-                    color = MaterialTheme.colorScheme.surface,
+                    color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(10.dp)
                 )
-                .padding(4.dp)
         ){
             Row(
                 modifier = Modifier
@@ -186,7 +185,7 @@ fun RegisterScreen(
                     .weight(1f)
                     .background(
                         color = if (selected.value == option1) {
-                            MaterialTheme.colorScheme.background
+                            MaterialTheme.colorScheme.surfaceTint
                         } else {
                             Color.Transparent
                         },
@@ -211,7 +210,7 @@ fun RegisterScreen(
                     .weight(1f)
                     .background(
                         color = if (selected.value == option2) {
-                            MaterialTheme.colorScheme.background
+                            MaterialTheme.colorScheme.surfaceVariant
                         } else {
                             Color.Transparent
                         },
@@ -356,11 +355,11 @@ fun RegisterScreen(
 fun RegisterViewPreview(){
     HHBaseTheme {
         RegisterScreen(
-            firstName =  remember { mutableStateOf("") },
-            lastName = remember { mutableStateOf("") },
-            email = remember { mutableStateOf("") },
-            password = remember { mutableStateOf("") },
-            confirm = remember { mutableStateOf("") },
+            firstName =  remember { mutableStateOf("sdf") },
+            lastName = remember { mutableStateOf("sdf") },
+            email = remember { mutableStateOf("sdf") },
+            password = remember { mutableStateOf("dsf") },
+            confirm = remember { mutableStateOf("sdf") },
             register = {},
             errorText = remember { mutableStateOf(null) },
             back = {},

@@ -10,17 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import com.jmg.baseproject.HHBaseTheme
 import com.jmg.baseproject.accessClasses.auth.*
-import com.jmg.baseproject.camera.VideoScreen
-import com.jmg.baseproject.ui.auth.LoginScreen
-import com.jmg.hhbase.ui.theme.HHBaseTheme
-import com.jmg.baseproject.dialogs.ProgressDialogText
 import com.jmg.baseproject.ui.auth.RegisterScreen
-import com.jmg.baseproject.ui.payment.PaymentScreen
-import retrofit2.Response
-import kotlin.math.max
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,27 +36,30 @@ class MainActivity : ComponentActivity() {
 ////                        login = { /*TODO*/ },
 //                        error = remember { mutableStateOf("") },
 //                        logo = R.drawable.ic_launcher_foreground,
-//                        response = remember { mutableStateOf(null) }
+//                        response = remember { mutableStateOf(null) },
+//                        progress = remember {
+//                            mutableStateOf(false)
+//                        }
 //                    )
 
-//                    RegisterClass(
-//                        baseUrl = "https://sandbox.homeworkhelperapp.org",
-//                    ).GetRegisterScreen(
-//                        resp = remember { mutableStateOf(null)},
-//                        err = remember { mutableStateOf(null)},
-//                        first = remember { mutableStateOf("") },
-//                        last = remember { mutableStateOf("") },
-//                        email = remember { mutableStateOf("") },
-//                        pass = remember { mutableStateOf("") },
-//                        confirm = remember { mutableStateOf("") },
-//                        logoInt = R.drawable.ic_launcher_foreground,
-//                        back = {},
-//                        optionOne = "Parent",
-//                        optionTwo = "Student",
-//                        terms = {},
-//                        progress = remember { mutableStateOf(false)},
-//                        zip = remember { mutableStateOf(null)}
-//                    )
+                    RegisterClass(
+                        baseUrl = "https://sandbox.homeworkhelperapp.org",
+                    ).GetRegisterScreen(
+                        resp = remember { mutableStateOf(null)},
+                        err = remember { mutableStateOf(null)},
+                        first = remember { mutableStateOf("") },
+                        last = remember { mutableStateOf("") },
+                        email = remember { mutableStateOf("") },
+                        pass = remember { mutableStateOf("") },
+                        confirm = remember { mutableStateOf("") },
+                        logoInt = R.drawable.ic_launcher_foreground,
+                        back = {},
+                        optionOne = "Parent",
+                        optionTwo = "Student",
+                        terms = {},
+                        progress = remember { mutableStateOf(false)},
+                        zip = remember { mutableStateOf(null)}
+                    )
 //                }
 
 //                    PaymentScreen(
@@ -75,11 +71,11 @@ class MainActivity : ComponentActivity() {
 //                        error = remember { mutableStateOf(null) }
 //                    )
 
-                    VideoScreen(
-                        facingFront = true,
-                        onImageCaptured = {uri, b->},
-                        maxTime = 10000L
-                    )
+//                    VideoScreen(
+//                        facingFront = true,
+//                        onImageCaptured = {uri, b->},
+//                        maxTime = 10000L
+//                    )
                 }
             }
         }
@@ -90,16 +86,22 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     HHBaseTheme {
-        LoginScreen(
-            email = remember { mutableStateOf("text") },
-            password = remember { mutableStateOf("pass") },
-            passwordVis = remember { mutableStateOf(false) },
-            forgot = {},
-            login = {},
-            error = remember { mutableStateOf(null)},
-            logo = R.drawable.ic_launcher_foreground,
-            register = {},
-            progress = remember { mutableStateOf(false)}
+        RegisterScreen(
+            firstName = mutableStateOf("Jeremy"),
+            lastName = mutableStateOf("Kruid"),
+            email = mutableStateOf("jeremy@vconn.org"),
+            password = mutableStateOf(""),
+            confirm = mutableStateOf(""),
+            zip = mutableStateOf("51234"),
+            register = { /*TODO*/ },
+            errorText = mutableStateOf("error"),
+            back = { /*TODO*/ },
+            logo = R.mipmap.ic_launcher,
+            termsClick = { /*TODO*/ },
+            option1 = "Parent",
+            option2 = "Student",
+            selected = mutableStateOf("Parent"),
+            progress = mutableStateOf(false)
         )
     }
 }

@@ -54,7 +54,7 @@ fun TopBarDrawableProfile(
                     bottom.linkTo(parent.bottom)
                 }
                 .clickable { btnClick.invoke() },
-            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseSurface)
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseOnSurface)
         )
 
         TV22B700(
@@ -89,7 +89,7 @@ fun TopBarDrawableProfile(
                 modifier = Modifier
                     .size(22.dp, 22.dp),
                 contentScale = ContentScale.Fit,
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseSurface)
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseOnSurface)
             )
         }
         

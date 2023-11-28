@@ -19,7 +19,7 @@ fun TV22B700(
         modifier = modifier,
         fontSize = 22.sp,
         fontWeight = FontWeight(700),
-        color = MaterialTheme.colorScheme.inverseSurface
+        color = MaterialTheme.colorScheme.onBackground
     )
 }
 @Composable
