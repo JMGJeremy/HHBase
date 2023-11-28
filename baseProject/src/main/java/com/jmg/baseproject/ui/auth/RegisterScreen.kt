@@ -210,7 +210,7 @@ fun RegisterScreen(
                     .weight(1f)
                     .background(
                         color = if (selected.value == option2) {
-                            MaterialTheme.colorScheme.surfaceVariant
+                            MaterialTheme.colorScheme.surfaceTint
                         } else {
                             Color.Transparent
                         },
@@ -367,7 +367,7 @@ fun RegisterViewPreview(){
             termsClick = {},
             option1 = "Parent",
             option2 = "Student",
-            selected = remember {mutableStateOf("Parent")},
+            selected = remember {mutableStateOf("Student")},
             progress = remember { mutableStateOf(false)},
             zip = remember { mutableStateOf("")}
         )
