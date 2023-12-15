@@ -47,14 +47,14 @@ fun TextFieldCardNumber(
             focusedIndicatorColor = Color.Transparent,
             errorIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
-            focusedTextColor = MaterialTheme.colorScheme.onBackground,
-            unfocusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
-            errorTextColor = MaterialTheme.colorScheme.onBackground,
-            focusedSupportingTextColor = MaterialTheme.colorScheme.onBackground,
-            disabledTextColor = MaterialTheme.colorScheme.onBackground,
-            errorSupportingTextColor = MaterialTheme.colorScheme.onBackground,
-            disabledSupportingTextColor = MaterialTheme.colorScheme.onBackground,
+            unfocusedTextColor = MaterialTheme.colorScheme.background,
+            focusedTextColor = MaterialTheme.colorScheme.background,
+            unfocusedSupportingTextColor = MaterialTheme.colorScheme.background,
+            errorTextColor = MaterialTheme.colorScheme.background,
+            focusedSupportingTextColor = MaterialTheme.colorScheme.background,
+            disabledTextColor = MaterialTheme.colorScheme.background,
+            errorSupportingTextColor = MaterialTheme.colorScheme.background,
+            disabledSupportingTextColor = MaterialTheme.colorScheme.background,
         ),
         shape = androidx.compose.ui.graphics.RectangleShape,
         visualTransformation = CreditCardVisualTransformation,
@@ -62,6 +62,7 @@ fun TextFieldCardNumber(
             Text(text = "Credit Card Number",
                 style = TextStyle(
                     fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.background
                 )
             )
         },

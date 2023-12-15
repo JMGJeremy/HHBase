@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = "1.5.6"
     }
 }
 
@@ -57,7 +57,6 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.androidx.hilt.navigation.compose)
-//    implementation ("com.github.kruid9403:LMBase:1.0.0")
 
 
     //Compose
@@ -102,8 +101,8 @@ dependencies {
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.media3.ui)
 
-    //Twilio
-    implementation(libs.video.android)
+    //Zoom
+    implementation(libs.zoom)
 }
 
 publishing{
