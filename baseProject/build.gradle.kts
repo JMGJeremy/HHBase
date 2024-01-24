@@ -100,6 +100,8 @@ dependencies {
 
     //Zoom
     implementation(libs.zoom)
+    //Dyte
+    implementation(libs.core.android)
 }
 
 publishing{
@@ -107,7 +109,7 @@ publishing{
         register<MavenPublication>("release"){
             groupId = "com.jmgjeremy"
             artifactId = "hhbase"
-            version = "1.0.2"
+            version = "1.0.3"
             afterEvaluate{
                 from(components["release"])
             }
