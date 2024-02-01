@@ -24,15 +24,19 @@ class RegisterClass(
         email: MutableState<String?>,
         pass: MutableState<String?>,
         confirm: MutableState<String?>,
-        err: MutableState<String?>,
+        setError: (String?)->Unit,
         resp: MutableState<Response<Any?>?>,
         optionOne: String,
         optionTwo: String,
-        logoInt: Int,
         back: ()->Unit,
         terms: ()->Unit,
-        progress: MutableState<Boolean>,
         zip: MutableState<String?>,
+        setProgress: (Boolean)->Unit,
+        setEmail: (String?)->Unit,
+        setInput: (String?)->Unit,
+        setLastName: (String?)->Unit,
+        setName: (String?)->Unit,
+        setZip: (String?)->Unit,
         ){
         RegisterScreen(
             firstName = first,
@@ -48,21 +52,28 @@ class RegisterClass(
                     confirm = confirm.value,
                     first = first.value,
                     last = last.value,
-                    error = err,
+                    setError = {setError.invoke(it)},
                     resp = resp,
                     type = selected.value.lowercase(),
                     zip = zip.value
                 )
                        },
-            errorText = err,
-            logo = logoInt,
+            setError = {setError.invoke(it)},
             back = back,
             termsClick = terms,
             option1 = optionOne,
             option2 = optionTwo,
             selected = selected,
-            progress = progress,
-            zip = zip
-            )
+            zip = zip,
+            setProgress = {
+                setProgress.invoke(it)
+            },
+            setInput = {setInput.invoke(it)},
+            setEmail = {setEmail.invoke(it)},
+            setZip = {setZip.invoke(it)},
+            setName = {setName.invoke(it)},
+            setLastName = {setLastName.invoke(it)}
+
+        )
     }
 }

@@ -16,10 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -40,15 +37,17 @@ import com.jmg.baseproject.ui.text.textFields.TfPass
 
 @Composable
 fun LoginScreen(
-    email: MutableState<String?>,
-    password: MutableState<String?>,
+    email: State<String?>,
+    password: State<String?>,
     passwordVis: MutableState<Boolean>,
     forgot: ()-> Unit,
     login: () -> Unit,
-    error: MutableState<String?>,
+    setError: (String?) ->Unit,
     logo: Int,
     register: ()-> Unit,
-    progress: MutableState<Boolean>
+    setProgress: (Boolean)->Unit,
+    setPassword: (String?)->Unit,
+    setEmail: (String?)->Unit
 ){
 
     val context = LocalContext.current
@@ -57,11 +56,11 @@ fun LoginScreen(
 
     fun loginUser(){
         when(true){
-            email.value.isNullOrEmpty() -> {error.value = "Please enter your email"}
-            !(email.value?.contains("@") == true && email.value?.contains(".") == true)-> {error.value = "Email is malformed"}
-            password.value.isNullOrEmpty() -> { error.value = "Please enter your password"}
+            email.value.isNullOrEmpty() -> {setError.invoke("Please enter your email")}
+            !(email.value?.contains("@") == true && email.value?.contains(".") == true)-> {setError.invoke("Email is malformed")}
+            password.value.isNullOrEmpty() -> { setError.invoke("Please enter your password")}
             else -> {
-                progress.value = true
+                setProgress.invoke(true)
                 login.invoke()
             }
         }
@@ -102,13 +101,13 @@ fun LoginScreen(
                     onNext = {
                         focus.moveFocus(FocusDirection.Down)
                     }
-                )
+                ),
+                setValue = {setEmail.invoke(it)}
             )
 
             TfPass(
                 input = password,
                 passwordVisible = passwordVis,
-                textColor = MaterialTheme.colorScheme.onBackground,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
@@ -118,7 +117,8 @@ fun LoginScreen(
                         loginUser()
                     }
                 ),
-                label = "Password"
+                label = "Password",
+                setInput = {setPassword.invoke(it)}
             )
         }
 
@@ -187,10 +187,14 @@ fun LoginViewPreview(){
         passwordVis = remember { mutableStateOf(false) },
         forgot = {},
         login = {},
-        error = remember { mutableStateOf(null) },
+        setError = {},
         logo = R.drawable.logo,
         register = {},
-        progress = remember { mutableStateOf(false)}
+        setProgress = {
+
+        },
+        setPassword = {},
+        setEmail = {}
     )
 
 }

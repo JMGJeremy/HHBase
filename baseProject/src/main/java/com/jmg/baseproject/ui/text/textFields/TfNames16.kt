@@ -14,10 +14,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
@@ -31,12 +28,12 @@ import com.jmg.baseproject.HHBaseTheme
 
 @Composable
 fun TfNames16(
-    value: MutableState<String?>,
+    value: State<String?>,
+    setValue:(String?)->Unit,
     label: String,
     modifier: Modifier,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions? = null,
-    trailingIcon: @Composable ()->Unit = {}
 ){
 
     val focus = LocalFocusManager.current
@@ -59,7 +56,7 @@ fun TfNames16(
             value = value.value ?: "",
             singleLine = true,
             onValueChange = {
-                value.value = it
+               setValue.invoke(it)
             },
             keyboardOptions = keyboardOptions,
             maxLines = 1,
@@ -91,7 +88,7 @@ fun TfNamePrev(){
             modifier = Modifier
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(),
-            trailingIcon = {}
+            setValue = {}
         )
     }
 }

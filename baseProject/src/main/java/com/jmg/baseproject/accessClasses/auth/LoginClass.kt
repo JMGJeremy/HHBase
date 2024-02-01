@@ -1,11 +1,7 @@
 package com.jmg.baseproject.accessClasses.auth
 
 import android.widget.Toast
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import com.jmg.baseproject.models.auth.LoginResponse
 import com.jmg.baseproject.ui.auth.BaseLoginViewModel
@@ -30,10 +26,13 @@ class LoginClass(
         password: MutableState<String?>,
         passwordVis: MutableState<Boolean>,
         forgot: ()->Unit,
-        error: MutableState<String?>,
+        error: State<String?>,
         logo: Int,
         response: MutableState<LoginResponse?>,
-        progress: MutableState<Boolean>
+        setProgress: (Boolean)->Unit,
+        setEmail: (String?)->Unit,
+        setPassword: (String?)->Unit,
+        setError: (String?)->Unit
         ){
 
         LoginScreen(
@@ -51,22 +50,26 @@ class LoginClass(
                         if (resp.isSuccessful && resp.body() != null) {
                             response.value = resp.body()
                         }else if(resp.code() > 299){
-                            error.value = resp.message()
+                            setError.invoke(resp.message())
                         }
-                        progress.value = false
+                        setProgress.invoke(false)
                     }
                 }catch (e: HttpException){
-                    progress.value = false
-                    error.value = e.localizedMessage
+                    setProgress.invoke(false)
+                    setError.invoke(e.localizedMessage)
                 }catch(e: Exception){
-                    progress.value = false
-                    error.value = e.localizedMessage
+                    setProgress.invoke(false)
+                    setError.invoke(e.localizedMessage)
                 }
             },
-            error = error,
+            setError = { setError.invoke(it) },
             logo = logo,
             register = reg,
-            progress = progress
+            setProgress = {
+                setProgress.invoke(true)
+            },
+            setEmail = {setEmail.invoke(it)},
+            setPassword = {setPassword.invoke(it)}
         )
     }
 }

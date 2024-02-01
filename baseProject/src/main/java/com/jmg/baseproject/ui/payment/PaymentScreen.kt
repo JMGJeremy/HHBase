@@ -39,7 +39,7 @@ fun PaymentScreen(
     addCard:(String, String, String, String)->Unit,
     skippable: Boolean = false,
     skip: ()->Unit,
-    error: MutableState<String?>
+    setError: (String?)->Unit
 ){
 
     val cardNumber = remember { mutableStateOf<String?>(null)}
@@ -118,10 +118,10 @@ fun PaymentScreen(
         B18PrimaryBodyMedRound(
             click = {
                 when (true){
-                    cardNumber.value.isNullOrEmpty() -> error.value = "Enter your card number"
-                    date.value.isNullOrEmpty() -> error.value = "Enter your expiration date"
-                    cvv.value.isNullOrEmpty() -> error.value = "Enter your CVV"
-                    zip.value.isNullOrEmpty() -> error.value = "Enter your zip code"
+                    cardNumber.value.isNullOrEmpty() -> setError.invoke("Enter your card number")
+                    date.value.isNullOrEmpty() -> setError.invoke("Enter your expiration date")
+                    cvv.value.isNullOrEmpty() -> setError.invoke("Enter your CVV")
+                    zip.value.isNullOrEmpty() -> setError.invoke("Enter your zip code")
                     else -> addCard.invoke(cardNumber.value ?: "", cvv.value ?: "", date.value ?: "", zip.value ?: "")
                 }
 
@@ -148,7 +148,7 @@ fun PaymentPrev(){
             },
             skippable = true,
             skip = {},
-            error = remember { mutableStateOf(null)}
+            setError = {}
         )
     }
 }

@@ -1,5 +1,6 @@
 package com.jmg.baseproject.ui.text.textFields
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -15,10 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,15 +28,22 @@ import com.jmg.baseproject.HHBaseTheme
 
 @Composable
 fun CommentBoxGray(
-    value: MutableState<String?>,
+    value: State<String?>,
     modifier: Modifier,
-    label: String
+    label: String,
+    setValue: (String)->Unit
 ){
 
+    val TAG = "CommentBoxGray"
+    val comment = remember { mutableStateOf("")}
+    LaunchedEffect(key1 = comment.value){
+        setValue.invoke(comment.value)
+    }
     TextField(
-        value = value.value ?: "",
+        value = comment.value,
         onValueChange = {
-            value.value = it
+            comment.value = it
+            setValue.invoke(it)
         },
         colors = TextFieldDefaults.colors(
             disabledIndicatorColor = Color.Transparent,
@@ -93,7 +98,8 @@ fun CommentBoxGrayPrev(){
             )
             .fillMaxWidth()
             .height(200.dp),
-            label = "Enter optional stuff here"
+            label = "Enter optional stuff here",
+            setValue = {}
         )
     }
 }

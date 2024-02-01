@@ -14,10 +14,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
@@ -32,16 +29,13 @@ import com.jmg.baseproject.HHBaseTheme
 
 @Composable
 fun TfEmail(
-    value: MutableState<String?>,
+    value: State<String?>,
     label: String,
     modifier: Modifier,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
-    trailingIcon: @Composable ()->Unit = {}
+    setValue: (String)->Unit
 ){
-
-    val focus = LocalFocusManager.current
-
     Column(
         modifier = modifier
     ) {
@@ -55,7 +49,7 @@ fun TfEmail(
             value = value.value ?: "",
 //            singleLine = true,
             onValueChange = {
-                value.value = it
+                setValue.invoke(it)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -110,7 +104,7 @@ fun LoginTextFieldPreview(){
             modifier = Modifier
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(),
-            trailingIcon = {},
+            setValue = {},
             keyboardActions = KeyboardActions()
         )
     }

@@ -7,10 +7,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,7 +17,7 @@ import com.jmg.baseproject.HHBaseTheme
 @Composable
 fun WebViewScreen(
     url: String,
-    progress: MutableState<Boolean>
+    setProgress: (Boolean)->Unit
 ){
     val context = LocalContext.current
 
@@ -51,7 +48,7 @@ fun WebViewScreen(
                     webViewClient = object: WebViewClient(){
                         override fun onPageFinished(view: WebView?, url: String?) {
                             super.onPageFinished(view, url)
-                            progress.value = false
+                            setProgress.invoke(false)
                         }
                     }
 //                    loadUrl(WebViewUrl)
@@ -69,7 +66,7 @@ fun WebviewPrev(){
     HHBaseTheme {
         WebViewScreen(
             url = "google.com",
-            progress = remember { mutableStateOf(false) }
+            setProgress = {}
             )
     }
 }

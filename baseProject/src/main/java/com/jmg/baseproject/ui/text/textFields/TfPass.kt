@@ -15,10 +15,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -39,17 +36,12 @@ import com.jmg.baseproject.DroidFontFamily
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TfPass(
-    input: MutableState<String?>,
+    input: State<String?>,
+    setInput: (String?)->Unit,
     modifier: Modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp),
-    textColor: Color = MaterialTheme.colorScheme.onPrimary,
     label: String = "",
-    placeHolder: @Composable ()->Unit = {
-        Text("Password",
-            color = Color.Gray
-        )
-    },
     passwordVisible: MutableState<Boolean>,
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         capitalization = KeyboardCapitalization.None,
@@ -71,7 +63,7 @@ fun TfPass(
         BasicTextField(
             value = input.value ?: "",
             onValueChange = {
-                input.value = it
+                setInput.invoke(it)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -100,6 +92,7 @@ fun PasswordTextFieldPreview(){
         TfPass(
             input = remember { mutableStateOf("password") },
             passwordVisible = remember {mutableStateOf(false) },
+            setInput = {}
         )
 
 }

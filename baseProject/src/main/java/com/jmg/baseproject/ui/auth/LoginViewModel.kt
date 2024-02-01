@@ -38,7 +38,7 @@ class BaseLoginViewModel(baseUrl: String): ViewModel() {
         first: String?,
         last: String?,
         resp: MutableState<Response<Any?>?>,
-        error: MutableState<String?>,
+        setError: (String?)->Unit,
         type: String,
         zip: String?
     ) {
@@ -61,7 +61,7 @@ class BaseLoginViewModel(baseUrl: String): ViewModel() {
             }
 
             override fun onFailure(call: Call<Any?>, t: Throwable) {
-                error.value = t.localizedMessage
+               setError.invoke(t.localizedMessage)
             }
         })
     }

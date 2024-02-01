@@ -42,24 +42,24 @@ class MainActivity : ComponentActivity() {
 //                        }
 //                    )
 
-                    RegisterClass(
-                        baseUrl = "https://sandbox.homeworkhelperapp.org",
-                    ).GetRegisterScreen(
-                        resp = remember { mutableStateOf(null)},
-                        err = remember { mutableStateOf(null)},
-                        first = remember { mutableStateOf("") },
-                        last = remember { mutableStateOf("") },
-                        email = remember { mutableStateOf("") },
-                        pass = remember { mutableStateOf("") },
-                        confirm = remember { mutableStateOf("") },
-                        logoInt = R.drawable.ic_launcher_foreground,
-                        back = {},
-                        optionOne = "Parent",
-                        optionTwo = "Student",
-                        terms = {},
-                        progress = remember { mutableStateOf(false)},
-                        zip = remember { mutableStateOf(null)}
-                    )
+//                    RegisterClass(
+//                        baseUrl = "https://sandbox.homeworkhelperapp.org",
+//                    ).GetRegisterScreen(
+//                        resp = remember { mutableStateOf(null)},
+//                        err = remember { mutableStateOf(null)},
+//                        first = remember { mutableStateOf("") },
+//                        last = remember { mutableStateOf("") },
+//                        email = remember { mutableStateOf("") },
+//                        pass = remember { mutableStateOf("") },
+//                        confirm = remember { mutableStateOf("") },
+//                        logoInt = R.drawable.ic_launcher_foreground,
+//                        back = {},
+//                        optionOne = "Parent",
+//                        optionTwo = "Student",
+//                        terms = {},
+//                        progress = remember { mutableStateOf(false)},
+//                        zip = remember { mutableStateOf(null)}
+//                    )
 //                }
 
 //                    PaymentScreen(
@@ -82,26 +82,26 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    HHBaseTheme {
-        RegisterScreen(
-            firstName = mutableStateOf("Jeremy"),
-            lastName = mutableStateOf("Kruid"),
-            email = mutableStateOf("jeremy@vconn.org"),
-            password = mutableStateOf(""),
-            confirm = mutableStateOf(""),
-            zip = mutableStateOf("51234"),
-            register = { /*TODO*/ },
-            errorText = mutableStateOf("error"),
-            back = { /*TODO*/ },
-            logo = R.mipmap.ic_launcher,
-            termsClick = { /*TODO*/ },
-            option1 = "Parent",
-            option2 = "Student",
-            selected = mutableStateOf("Parent"),
-            progress = mutableStateOf(false)
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    HHBaseTheme {
+//        RegisterScreen(
+//            firstName = mutableStateOf("Jeremy"),
+//            lastName = mutableStateOf("Kruid"),
+//            email = mutableStateOf("jeremy@vconn.org"),
+//            password = mutableStateOf(""),
+//            confirm = mutableStateOf(""),
+//            zip = mutableStateOf("51234"),
+//            register = { /*TODO*/ },
+//            errorText = mutableStateOf("error"),
+//            back = { /*TODO*/ },
+//            logo = R.mipmap.ic_launcher,
+//            termsClick = { /*TODO*/ },
+//            option1 = "Parent",
+//            option2 = "Student",
+//            selected = mutableStateOf("Parent"),
+//            progress = mutableStateOf(false)
+//        )
+//    }
+//}

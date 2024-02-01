@@ -24,12 +24,7 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -70,14 +65,18 @@ fun RegisterScreen(
     confirm: MutableState<String?>,
     zip: MutableState<String?>,
     register: () -> Unit,
-    errorText: MutableState<String?>,
+    setError: (String?)->Unit,
     back: ()->Unit,
-    logo: Int,
     termsClick: ()->Unit,
     option1: String,
     option2: String,
     selected: MutableState<String>,
-    progress: MutableState<Boolean>
+    setProgress: (Boolean)->Unit,
+    setEmail:  (String?) ->Unit,
+    setName:  (String?) ->Unit,
+    setLastName:  (String?) ->Unit,
+    setZip:  (String?) ->Unit,
+    setInput: (String?) ->Unit
 ){
 
     val passwordVis = remember { mutableStateOf<Boolean>(true)}
@@ -85,26 +84,26 @@ fun RegisterScreen(
     fun registerUser(){
         when (true) {
             firstName.value.isNullOrEmpty() -> {
-                errorText.value = "Please enter your first name."
+                setError.invoke("Please enter your first name.")
             }
 
             lastName.value.isNullOrEmpty() -> {
-                errorText.value = "Please enter your last name."
+                setError.invoke("Please enter your last name.")
             }
 
             email.value.isNullOrEmpty() -> {
-                errorText.value = "Please enter your email."
+                setError.invoke("Please enter your email.")
             }
 
             password.value.isNullOrEmpty() -> {
-                errorText.value = "Please enter your password."
+                setError.invoke("Please enter your password.")
             }
 
 //            confirm.value.isNullOrEmpty() -> {
 //                errorText.value = "Please enter your password confirmation."
 //            }
             else -> {
-                progress.value = true
+                setProgress.invoke(true)
                 register.invoke()
             }
         }
@@ -248,7 +247,8 @@ fun RegisterScreen(
                     capitalization = KeyboardCapitalization.Words,
                     imeAction = ImeAction.Next
                 ),
-                modifier = mod
+                modifier = mod,
+                setValue = {setName.invoke(it)}
             )
 
 
@@ -260,7 +260,8 @@ fun RegisterScreen(
                     capitalization = KeyboardCapitalization.Words,
                     imeAction = ImeAction.Next
                 ),
-                modifier = mod
+                modifier = mod,
+                setValue = {setLastName.invoke(it)}
             )
 
             TfNames16(
@@ -270,10 +271,9 @@ fun RegisterScreen(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Next
-                )
-            ) {
-
-            }
+                ),
+                setValue = {setZip.invoke(it)}
+            )
 
             TfNames16(
                 value = email,
@@ -284,12 +284,12 @@ fun RegisterScreen(
                     imeAction = ImeAction.Next
                 ),
                 modifier = mod,
+                setValue = {setEmail.invoke(it)}
             )
 
             TfPass(
                 input = password,
                 passwordVisible = passwordVis,
-                textColor = MaterialTheme.colorScheme.onPrimary,
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done
                 ),
@@ -298,7 +298,8 @@ fun RegisterScreen(
                         registerUser()
                     }
                 ),
-                label = "Password"
+                label = "Password",
+                setInput = {setInput.invoke(it)}
             )
 
 
@@ -337,7 +338,7 @@ fun RegisterScreen(
             ClickableText(
                 text = termsString,
                 onClick = {
-                    progress.value = true
+                    setProgress.invoke(true)
                     termsClick.invoke()
                 },
                 modifier = Modifier
@@ -361,15 +362,19 @@ fun RegisterViewPreview(){
             password = remember { mutableStateOf("dsf") },
             confirm = remember { mutableStateOf("sdf") },
             register = {},
-            errorText = remember { mutableStateOf(null) },
+            setError = {},
             back = {},
-            logo = R.drawable.logo,
             termsClick = {},
             option1 = "Parent",
             option2 = "Student",
             selected = remember {mutableStateOf("Student")},
-            progress = remember { mutableStateOf(false)},
-            zip = remember { mutableStateOf("")}
+            zip = remember { mutableStateOf("")},
+            setProgress = {},
+            setEmail=  {},
+        setName= {},
+        setLastName=  {},
+        setZip=  {},
+        setInput= {}
         )
     }
 }
