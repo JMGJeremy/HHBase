@@ -109,7 +109,7 @@ publishing{
         register<MavenPublication>("release"){
             groupId = "com.jmgjeremy"
             artifactId = "hhbase"
-            version = "1.0.27"
+            version = "1.0.29"
             afterEvaluate{
                 from(components["release"])
             }

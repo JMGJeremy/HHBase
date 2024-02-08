@@ -7,6 +7,6 @@ data class UserDevice(
     @SerializedName("os") val os: String
 )
 
-data class UserDeviceRequest(
+data class AddDeviceRequest(
     @SerializedName("user_device") val userDevice: UserDevice
 )
