@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.6"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 }
 
@@ -109,7 +109,7 @@ publishing{
         register<MavenPublication>("release"){
             groupId = "com.jmgjeremy"
             artifactId = "hhbase"
-            version = "1.0.21"
+            version = "1.0.26"
             afterEvaluate{
                 from(components["release"])
             }

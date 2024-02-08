@@ -4,23 +4,23 @@ agp = "8.2.2"
 camera-core = "1.3.1"
 coil-compose = "2.4.0"
 core-android = "+"
-kotlin = "1.9.21"
+kotlin = "1.9.22"
 core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 lifecycle-runtime-ktx = "2.7.0"
 activity-compose = "1.8.2"
-compose-bom = "2024.01.00"
+compose-bom = "2024.02.00"
 logging-interceptor = "5.0.0-alpha.10"
 hilt-navigation-compose = "1.1.0"
-material-icons-extended = "1.5.4"
+material-icons-extended = "1.6.1"
 constraintlayout-compose = "1.0.1"
 media3-exoplayer = "1.2.1"
 retrofit = "2.9.0"
 room-ktx = "2.6.1"
-ui = "1.5.4"
-ksp = "1.9.21-1.0.16"
+ui = "1.6.1"
+ksp = "1.9.22-1.0.17"
 zoom = "1.8.2"
 
 [libraries]
@@ -68,4 +68,3 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
-

@@ -1,5 +1,6 @@
 package com.jmg.hhbase
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jmg.baseproject.HHBaseTheme
 import com.jmg.baseproject.accessClasses.auth.*
+import com.jmg.baseproject.dyte.DyteSetup
 import com.jmg.baseproject.ui.auth.RegisterScreen
 
 class MainActivity : ComponentActivity() {
@@ -25,6 +27,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+
+                    val i = Intent(this, DyteSetup::class.java)
+                    startActivity(i)
 //                    LoginClass(
 //                        baseUrl = "https://sandbox.homeworkhelperapp.org",
 //                        register = {}
