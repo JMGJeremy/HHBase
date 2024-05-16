@@ -77,7 +77,7 @@ fun TfPass(
             textStyle = TextStyle(
                 fontFamily = DroidFontFamily,
                 fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onBackground
             ),
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,

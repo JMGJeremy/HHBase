@@ -1,4 +1,4 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
@@ -11,7 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
 }
 
@@ -102,6 +102,7 @@ dependencies {
     implementation(libs.zoom)
     //Dyte
     implementation(libs.core.android)
+//    implementation(libs.uikit)
 }
 
 publishing{
@@ -109,7 +110,7 @@ publishing{
         register<MavenPublication>("release"){
             groupId = "com.jmgjeremy"
             artifactId = "hhbase"
-            version = "1.0.29"
+            version = "1.0.55"
             afterEvaluate{
                 from(components["release"])
             }
@@ -117,7 +118,6 @@ publishing{
             repositories {
                 mavenLocal()
             }
-
         }
     }
 }
