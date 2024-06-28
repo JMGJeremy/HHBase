@@ -1,6 +1,9 @@
 package com.jmg.baseproject.ui.selectors
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,16 +60,42 @@ fun StringSelector(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(horizontal = 24.dp)
         ) {
-            items(items = items) {
+            items(items = if( search.value.isEmpty()){
+                items
+            } else {
+                items.filter { it.contains(search.value, ignoreCase = true) }
+            }) {
                 Row(
                    modifier = Modifier
                        .fillMaxWidth()
-                       .border(width = 1.dp, color = MaterialTheme.colorScheme.onBackground, shape = RoundedCornerShape(50))
+                       .padding(vertical = 8.dp)
+                       .background(color = if (selected.value == it) {
+                           MaterialTheme.colorScheme.onBackground
+                       } else {
+                           MaterialTheme.colorScheme.background
+                       },
+                           shape = RoundedCornerShape(50)
+                       )
+                       .border(
+                           width = 1.dp,
+                           color = MaterialTheme.colorScheme.onBackground,
+                           shape = RoundedCornerShape(50)
+                       )
+                       .clickable { selected.value = it },
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = it,
                         modifier = Modifier
-                        )
+                            .padding(vertical = 8.dp),
+                        color = if (selected.value == it) {
+                            MaterialTheme.colorScheme.background
+                        } else {
+                            MaterialTheme.colorScheme.onBackground
+                        }
+                    )
                 }
             }
         }
