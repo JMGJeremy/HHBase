@@ -289,7 +289,6 @@ fun RegisterScreen(
 
             TfPass(
                 input = password,
-                passwordVisible = passwordVis,
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done
                 ),

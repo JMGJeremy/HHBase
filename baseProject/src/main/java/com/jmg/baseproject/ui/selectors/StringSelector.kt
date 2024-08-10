@@ -51,7 +51,7 @@ fun StringSelector(
             modifier = Modifier
                 .padding(horizontal = 24.dp, vertical = 24.dp)
                 .fillMaxWidth()
-                .border(width = .5.dp, shape = RoundedCornerShape(50), color = Color.Black),
+                .border(width = .5.dp, shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.onBackground),
             search = {
 
             }
@@ -72,9 +72,9 @@ fun StringSelector(
                        .fillMaxWidth()
                        .padding(vertical = 8.dp)
                        .background(color = if (selected.value == it) {
-                           MaterialTheme.colorScheme.onBackground
-                       } else {
                            MaterialTheme.colorScheme.background
+                       } else {
+                           MaterialTheme.colorScheme.onBackground
                        },
                            shape = RoundedCornerShape(50)
                        )
@@ -91,9 +91,9 @@ fun StringSelector(
                         modifier = Modifier
                             .padding(vertical = 8.dp),
                         color = if (selected.value == it) {
-                            MaterialTheme.colorScheme.background
-                        } else {
                             MaterialTheme.colorScheme.onBackground
+                        } else {
+                            MaterialTheme.colorScheme.background
                         }
                     )
                 }

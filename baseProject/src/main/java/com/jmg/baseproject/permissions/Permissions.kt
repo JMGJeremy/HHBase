@@ -6,12 +6,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import com.google.accompanist.permissions.rememberPermissionState
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun locationPermission(
-    context: Context
-){
+fun LocationPermission(){
     val launcher = rememberMultiplePermissionsState(
         listOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -22,3 +21,6 @@ fun locationPermission(
         launcher.launchMultiplePermissionRequest()
     }
 }
+
+
+

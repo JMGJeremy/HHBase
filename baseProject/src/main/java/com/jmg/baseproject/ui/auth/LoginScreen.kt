@@ -107,7 +107,6 @@ fun LoginScreen(
 
             TfPass(
                 input = password,
-                passwordVisible = passwordVis,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done

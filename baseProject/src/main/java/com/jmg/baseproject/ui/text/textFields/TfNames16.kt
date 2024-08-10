@@ -48,7 +48,7 @@ fun TfNames16(
         Text(text = label,
             modifier = Modifier
                 .padding(bottom = 4.dp),
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = 14.sp
             )
 
@@ -66,12 +66,12 @@ fun TfNames16(
                 ),
             textStyle = TextStyle(
                 fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp)
-                .background(color = MaterialTheme.colorScheme.inverseSurface, shape = RoundedCornerShape(50))
+                .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
                 .padding(horizontal = 8.dp, vertical = 8.dp)
         )
     }

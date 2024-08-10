@@ -42,53 +42,27 @@ fun TfEmail(
         Text(text = label,
             modifier = Modifier
                 .padding(bottom = 4.dp),
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.onSecondary,
             fontSize = 14.sp
             )
         BasicTextField(
             value = value.value ?: "",
-//            singleLine = true,
             onValueChange = {
                 setValue.invoke(it)
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.inverseSurface, shape = RoundedCornerShape(50))
+                .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
                 .padding(horizontal = 8.dp, vertical = 8.dp),
             textStyle = TextStyle(
                 fontFamily = DroidFontFamily,
                 fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onPrimaryContainer
             ),
-//            colors = TextFieldDefaults.textFieldColors(
-//                textColor = MaterialTheme.colorScheme.background,
-//                focusedIndicatorColor = Color.Transparent,
-//                errorIndicatorColor = Color.Transparent,
-//                disabledIndicatorColor = Color.Transparent,
-//                unfocusedIndicatorColor = Color.Transparent,
-//                cursorColor = MaterialTheme.colorScheme.onPrimary,
-//                backgroundColor = Color.LightGray,
-//                disabledLabelColor = MaterialTheme.colorScheme.background,
-//                errorLabelColor = MaterialTheme.colorScheme.background,
-//                focusedLabelColor = MaterialTheme.colorScheme.background,
-//                unfocusedLabelColor = MaterialTheme.colorScheme.background
-//            ),
-//            label = {
-//                Text(
-//                    text = label,
-//                    style = TextStyle(
-//                        color = Color.Gray,
-//                        fontSize = 16.sp
-//                    ),
-//                    overflow = TextOverflow.Ellipsis,
-//                    maxLines = 1
-//                )
-//            },
+
             keyboardOptions = keyboardOptions,
             maxLines = 1,
             keyboardActions = keyboardActions,
-//            trailingIcon = trailingIcon,
-//            shape = RoundedCornerShape(50)
         )
     }
 
