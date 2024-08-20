@@ -2,34 +2,23 @@ package com.jmg.baseproject.ui.text.textFields
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.VectorPainter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -43,14 +32,11 @@ import androidx.compose.ui.unit.sp
 import com.jmg.baseproject.DroidFontFamily
 import com.jmg.baseproject.R
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TfPass(
     input: State<String?>,
     setInput: (String?)->Unit,
-    modifier: Modifier = Modifier
-        .fillMaxWidth()
-        .padding(top = 16.dp),
+    modifier: Modifier = Modifier,
     label: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         capitalization = KeyboardCapitalization.None,
@@ -60,9 +46,9 @@ fun TfPass(
     keyboardActions: KeyboardActions = KeyboardActions()
     ){
 
-    var vis by remember { mutableStateOf(false)}
+    var vis by remember { mutableStateOf(true)}
 
-    Box(
+    Column (
         modifier = modifier
     ) {
         Text(
@@ -70,51 +56,59 @@ fun TfPass(
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onSecondary,
             modifier = Modifier
-                .align(Alignment.TopStart)
+                .padding(bottom = 4.dp),
         )
 
-        BasicTextField(
-            value = input.value ?: "",
-            onValueChange = {
-                setInput.invoke(it)
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomStart)
-                .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
-                .padding(horizontal = 8.dp, vertical = 8.dp),
-            visualTransformation = if (vis) {
-                PasswordVisualTransformation()
-            } else {
-                VisualTransformation.None
-            },
-            textStyle = TextStyle(
-                fontFamily = DroidFontFamily,
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            ),
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            maxLines = 1
-        )
+        Box(
 
-        Image(
-            painter = painterResource(
-                id = if (vis){
-                    R.drawable.eye
-                }else {
-                    R.drawable.eye_slash
-                }
-            ),
-            contentDescription = "Password visibility",
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .clickable {
-                    vis = !vis
-                }
-                .padding(8.dp),
-            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimaryContainer)
-        )
+        ) {
+            BasicTextField(
+                value = input.value ?: "",
+                onValueChange = {
+                    setInput.invoke(it)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        shape = RoundedCornerShape(50)
+                    )
+                    .padding(horizontal = 8.dp, vertical = 8.dp),
+                visualTransformation = if (vis) {
+                    PasswordVisualTransformation()
+                } else {
+                    VisualTransformation.None
+                },
+                textStyle = TextStyle(
+                    fontFamily = DroidFontFamily,
+                    fontSize = 14.sp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                ),
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                maxLines = 1
+            )
+
+            Image(
+                painter = painterResource(
+                    id = if (vis) {
+                        R.drawable.eye
+                    } else {
+                        R.drawable.eye_slash
+                    }
+                ),
+                contentDescription = "Password visibility",
+                modifier = Modifier
+                    .clickable {
+                        vis = !vis
+                    }
+                    .padding(end = 8.dp)
+                    .size(24.dp)
+                    .align(Alignment.CenterEnd),
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onPrimaryContainer),
+                contentScale = ContentScale.FillWidth
+            )
+        }
     }
 }
 
