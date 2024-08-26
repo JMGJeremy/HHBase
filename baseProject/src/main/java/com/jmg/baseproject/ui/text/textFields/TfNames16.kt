@@ -48,7 +48,7 @@ fun TfNames16(
         Text(text = label,
             modifier = Modifier
                 .padding(bottom = 4.dp),
-            color = MaterialTheme.colorScheme.onSecondary,
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 14.sp
             )
 

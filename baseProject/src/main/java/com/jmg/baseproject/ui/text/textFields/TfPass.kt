@@ -54,7 +54,7 @@ fun TfPass(
         Text(
             text = label,
             fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSecondary,
+            color = MaterialTheme.colorScheme.onBackground,
             modifier = Modifier
                 .padding(bottom = 4.dp),
         )
