@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun BaseColumn(
+fun BaseColumnCentered(
     content: @Composable ()->Unit
 ){
     Column(
@@ -20,6 +20,8 @@ fun BaseColumn(
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
             .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
         content.invoke()
     }

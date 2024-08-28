@@ -51,7 +51,7 @@ fun StringSelector(
             modifier = Modifier
                 .padding(horizontal = 24.dp, vertical = 24.dp)
                 .fillMaxWidth()
-                .border(width = .5.dp, shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.onBackground),
+                .border(width = .5.dp, shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.primaryContainer),
             search = {
 
             }
