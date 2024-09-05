@@ -38,7 +38,8 @@ import com.jmg.baseproject.R
 fun StringSelector(
     items: SnapshotStateList<String>,
     selected: MutableState<String>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    search: Boolean = true,
 ){
     var search = remember { mutableStateOf("") }
     Column(
@@ -51,7 +52,7 @@ fun StringSelector(
             modifier = Modifier
                 .padding(horizontal = 24.dp, vertical = 24.dp)
                 .fillMaxWidth()
-                .border(width = .5.dp, shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.primaryContainer),
+                .border(width = .5.dp, shape = RoundedCornerShape(50), color = MaterialTheme.colorScheme.onBackground),
             search = {
 
             }
@@ -72,9 +73,9 @@ fun StringSelector(
                        .fillMaxWidth()
                        .padding(vertical = 8.dp)
                        .background(color = if (selected.value == it) {
-                           MaterialTheme.colorScheme.background
+                           MaterialTheme.colorScheme.onPrimaryContainer
                        } else {
-                           MaterialTheme.colorScheme.onBackground
+                           MaterialTheme.colorScheme.primaryContainer
                        },
                            shape = RoundedCornerShape(50)
                        )
@@ -91,9 +92,9 @@ fun StringSelector(
                         modifier = Modifier
                             .padding(vertical = 8.dp),
                         color = if (selected.value == it) {
-                            MaterialTheme.colorScheme.onBackground
+                            MaterialTheme.colorScheme.primaryContainer
                         } else {
-                            MaterialTheme.colorScheme.background
+                            MaterialTheme.colorScheme.onPrimaryContainer
                         }
                     )
                 }
