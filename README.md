@@ -11,3 +11,12 @@ Adding to a project:
 
 - If you make a change to the repo increment the build number and use ./gradlew publish again.
 - update the gradle and sync.
+
+Publishing
+-Create the local build
+-update the build number and push to github
+-Click on Releases
+-Click on new release, fill in the tag and description
+-find the files at /user/.m2
+-Add the files to the release
+-check the release at jitpack.io
