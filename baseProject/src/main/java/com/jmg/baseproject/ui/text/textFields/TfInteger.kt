@@ -51,7 +51,8 @@ fun TfInteger16(
                 width = 1.dp,
                 color = Color.Transparent,
                 shape = RoundedCornerShape(50)
-            ),
+            )
+            .height(46.dp),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Color.Gray,
             focusedIndicatorColor = Color.Transparent,

@@ -5,7 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -26,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -73,7 +76,8 @@ fun TfPass(
                         color = MaterialTheme.colorScheme.primaryContainer,
                         shape = RoundedCornerShape(50)
                     )
-                    .padding(horizontal = 8.dp, vertical = 8.dp),
+                    .padding(horizontal = 8.dp, vertical = 8.dp)
+                    .height(46.dp),
                 visualTransformation = if (vis) {
                     PasswordVisualTransformation()
                 } else {
@@ -86,7 +90,36 @@ fun TfPass(
                 ),
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActions,
-                maxLines = 1
+                maxLines = 1,
+                decorationBox = { innerTextField ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        Text(text = if (!vis) {
+                            input.value ?: ""
+                        } else {
+                            var t = ""
+                            if (input.value != null) {
+                                for (i in 0 until input.value?.length!!) {
+                                    t += "*"
+                                }
+                            }
+                            t
+                        },
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            modifier = Modifier
+                                .padding(horizontal = 8.dp)
+                                .fillMaxWidth()
+                        )
+                    }
+                }
             )
 
             Image(

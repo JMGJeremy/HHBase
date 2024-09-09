@@ -2,7 +2,9 @@ package com.jmg.baseproject.ui.text.textFields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +17,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
@@ -53,16 +56,35 @@ fun TfEmail(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
-                .padding(horizontal = 8.dp, vertical = 8.dp),
+                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .height(46.dp),
             textStyle = TextStyle(
                 fontFamily = DroidFontFamily,
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             ),
-
             keyboardOptions = keyboardOptions,
             maxLines = 1,
             keyboardActions = keyboardActions,
+            decorationBox = {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Text(text = value.value ?: "",
+                        style = TextStyle(
+                            fontSize = 20.sp,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        ),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .fillMaxWidth()
+                    )
+                }
+            }
         )
     }
 
