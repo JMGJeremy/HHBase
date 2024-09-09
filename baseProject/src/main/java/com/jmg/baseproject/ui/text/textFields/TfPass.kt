@@ -85,12 +85,21 @@ fun TfPass(
                 },
                 textStyle = TextStyle(
                     fontFamily = DroidFontFamily,
-                    fontSize = 20.sp,
+                    fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActions,
                 maxLines = 1,
+                decorationBox = { box ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        box()
+                    }
+                }
             )
 
             Image(
