@@ -60,31 +60,12 @@ fun TfEmail(
                 .height(46.dp),
             textStyle = TextStyle(
                 fontFamily = DroidFontFamily,
-                fontSize = 14.sp,
+                fontSize = 20.sp,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             ),
             keyboardOptions = keyboardOptions,
             maxLines = 1,
             keyboardActions = keyboardActions,
-            decorationBox = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Text(text = value.value ?: "",
-                        style = TextStyle(
-                            fontSize = 20.sp,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                            .fillMaxWidth()
-                    )
-                }
-            }
         )
     }
 

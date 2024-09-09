@@ -85,41 +85,12 @@ fun TfPass(
                 },
                 textStyle = TextStyle(
                     fontFamily = DroidFontFamily,
-                    fontSize = 14.sp,
+                    fontSize = 20.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActions,
                 maxLines = 1,
-                decorationBox = { innerTextField ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        contentAlignment = Alignment.CenterStart
-                    ) {
-                        Text(text = if (!vis) {
-                            input.value ?: ""
-                        } else {
-                            var t = ""
-                            if (input.value != null) {
-                                for (i in 0 until input.value?.length!!) {
-                                    t += "*"
-                                }
-                            }
-                            t
-                        },
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
-                            ),
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                            modifier = Modifier
-                                .padding(horizontal = 8.dp)
-                                .fillMaxWidth()
-                        )
-                    }
-                }
             )
 
             Image(
