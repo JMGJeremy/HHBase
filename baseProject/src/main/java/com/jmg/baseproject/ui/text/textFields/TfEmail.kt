@@ -56,16 +56,25 @@ fun TfEmail(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
-                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .padding(horizontal = 8.dp)
                 .height(46.dp),
             textStyle = TextStyle(
                 fontFamily = DroidFontFamily,
-                fontSize = 20.sp,
+                fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             ),
             keyboardOptions = keyboardOptions,
             maxLines = 1,
             keyboardActions = keyboardActions,
+            decorationBox = { box ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    box()
+                }
+            }
         )
     }
 

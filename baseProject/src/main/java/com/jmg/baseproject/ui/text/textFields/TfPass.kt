@@ -76,7 +76,7 @@ fun TfPass(
                         color = MaterialTheme.colorScheme.primaryContainer,
                         shape = RoundedCornerShape(50)
                     )
-                    .padding(horizontal = 8.dp, vertical = 8.dp)
+                    .padding(horizontal = 8.dp)
                     .height(46.dp),
                 visualTransformation = if (vis) {
                     PasswordVisualTransformation()
@@ -85,12 +85,21 @@ fun TfPass(
                 },
                 textStyle = TextStyle(
                     fontFamily = DroidFontFamily,
-                    fontSize = 20.sp,
+                    fontSize = 14.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 ),
                 keyboardOptions = keyboardOptions,
                 keyboardActions = keyboardActions,
                 maxLines = 1,
+                decorationBox = { box ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        box()
+                    }
+                }
             )
 
             Image(

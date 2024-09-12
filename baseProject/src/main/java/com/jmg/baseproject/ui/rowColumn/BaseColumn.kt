@@ -20,6 +20,7 @@ fun BaseColumn(
             .fillMaxSize()
             .background(color = MaterialTheme.colorScheme.background)
             .padding(24.dp),
+
     ) {
         content.invoke()
     }

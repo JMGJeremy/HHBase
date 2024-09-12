@@ -66,7 +66,7 @@ fun DateDialog(
         DatePicker(
             state = datePickerState,
             colors = DatePickerDefaults.colors(
-                containerColor = MaterialTheme.colorScheme.onBackground,
+                containerColor = MaterialTheme.colorScheme.background,
                 dateTextFieldColors = TextFieldDefaults.colors(
                     unfocusedTextColor = MaterialTheme.colorScheme.background,
                     focusedTextColor = MaterialTheme.colorScheme.background,
