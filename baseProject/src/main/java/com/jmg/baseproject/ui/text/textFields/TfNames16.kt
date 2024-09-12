@@ -75,7 +75,7 @@ fun TfNames16(
                 .fillMaxWidth()
                 .padding(top = 4.dp)
                 .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
-                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .padding(horizontal = 8.dp)
                 .height(46.dp),
             decorationBox = { innerTextField ->
                 Box(
@@ -83,17 +83,7 @@ fun TfNames16(
                         .fillMaxSize(),
                     contentAlignment = Alignment.CenterStart
                 ) {
-                    Text(text = value.value ?: "",
-                        style = TextStyle(
-                            fontSize = 20.sp,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
-                        ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier
-                            .padding(horizontal = 8.dp)
-                            .fillMaxWidth()
-                    )
+                    innerTextField()
                 }
             }
         )

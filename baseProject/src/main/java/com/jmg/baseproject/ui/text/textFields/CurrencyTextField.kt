@@ -1,6 +1,7 @@
 package com.jmg.baseproject.ui.text.textFields
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,7 +59,15 @@ fun CurrencyTextField(
                 keyboardType = KeyboardType.Decimal,
                 imeAction = ImeAction.Done
             ),
-            visualTransformation = transform()
+            visualTransformation = transform(),
+            decorationBox = { box ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    box()
+                }
+            }
         )
     }
 }

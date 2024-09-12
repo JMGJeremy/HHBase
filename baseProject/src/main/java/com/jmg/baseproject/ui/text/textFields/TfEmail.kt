@@ -56,7 +56,7 @@ fun TfEmail(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
-                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .padding(horizontal = 8.dp)
                 .height(46.dp),
             textStyle = TextStyle(
                 fontFamily = DroidFontFamily,
