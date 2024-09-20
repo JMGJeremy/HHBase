@@ -89,7 +89,6 @@ fun TopBarDrawableProfile(
                 modifier = Modifier
                     .size(22.dp, 22.dp),
                 contentScale = ContentScale.Fit,
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.inverseOnSurface)
             )
         }
         
