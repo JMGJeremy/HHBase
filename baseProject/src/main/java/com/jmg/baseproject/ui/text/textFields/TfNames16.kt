@@ -31,7 +31,10 @@ fun TfNames16(
     value: State<String?>,
     setValue:(String?)->Unit,
     label: String,
-    modifier: Modifier,
+    modifier: Modifier = Modifier.fillMaxWidth()
+        .padding(top = 4.dp)
+        .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
+        .padding(horizontal = 8.dp, vertical = 8.dp),
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions? = null,
 ){
