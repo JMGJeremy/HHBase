@@ -12,8 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -23,7 +21,6 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,7 +71,7 @@ fun TfNames16(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 4.dp)
-                .background(color = MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(50))
+                .background(color = Color.Transparent, shape = RoundedCornerShape(50))
                 .padding(horizontal = 8.dp)
                 .height(46.dp),
             decorationBox = { innerTextField ->

@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -34,7 +37,7 @@ fun TopBarDrawableProfile(
     drawable: Int,
     text: String,
     btnClick: ()->Unit,
-    img: String
+    img: MutableState<String>
 ){
 
     ConstraintLayout(
@@ -80,7 +83,7 @@ fun TopBarDrawableProfile(
                 .padding(8.dp)
         ) {
             Image(
-                painter = if (img.isNotEmpty()) {
+                painter = if (img.value.isNotEmpty()) {
                     rememberAsyncImagePainter(model = img)
                 } else {
                     painterResource(id = R.drawable.user)
@@ -108,7 +111,7 @@ fun TopBarDrawableProfilePrev(){
             drawable = R.drawable.chevron_left,
             text = "Tutors",
             btnClick = {},
-            img = ""
+            img = remember { mutableStateOf("") }
         )
     }
 }
