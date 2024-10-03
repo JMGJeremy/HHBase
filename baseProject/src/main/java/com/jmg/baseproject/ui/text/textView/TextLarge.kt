@@ -3,7 +3,9 @@ package com.jmg.baseproject.ui.text.textView
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,7 +18,9 @@ fun TextLarge(
     maxLines: Int = 1,
     textAlign: TextAlign = TextAlign.Center,
     color: Color = MaterialTheme.colorScheme.onBackground,
-    fontSize: Int = 24
+    fontSize: Int = 24,
+    modifier: Modifier = Modifier,
+    weight: Int = 400
 ) {
     Text(
         text = text,
@@ -24,7 +28,9 @@ fun TextLarge(
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
         textAlign = textAlign,
-        fontSize = fontSize.sp
+        fontSize = fontSize.sp,
+        fontWeight = FontWeight(weight),
+        modifier = modifier
     )
 }
 
