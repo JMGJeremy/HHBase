@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -14,7 +15,8 @@ import com.jmg.baseproject.R
 
 @Composable
 fun XBackButton(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    color: Color = MaterialTheme.colorScheme.primary
 ) {
     Image(
         painter = painterResource(R.drawable.xmark),
@@ -22,7 +24,7 @@ fun XBackButton(
         modifier = Modifier
             .size(24.dp)
             .clickable(onClick = onClick),
-        colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.primary)
+        colorFilter = ColorFilter.tint(color = color)
     )
 }
 

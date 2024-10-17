@@ -11,6 +11,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 
+@Deprecated("Use baseproject.dates.DateFormat.kt")
 fun String.formatDate(newFormat: String): String {
     try {
         val startFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
