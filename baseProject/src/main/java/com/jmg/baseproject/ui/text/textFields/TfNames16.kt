@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jmg.baseproject.HHBaseTheme
 
+@Deprecated("Use TextFieldBasic() and TextLarge() instead")
 @Composable
 fun TfNames16(
     value: State<String?>,

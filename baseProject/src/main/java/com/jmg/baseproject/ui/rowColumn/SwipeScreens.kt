@@ -62,7 +62,7 @@ fun SwipeScreens(
                 painter = painterResource(id = backIcon),
                 contentDescription = "Close Button",
                 modifier = Modifier
-                    .size(36.dp)
+                    .size(24.dp)
                     .clickable {
                         back.invoke()
                     },
