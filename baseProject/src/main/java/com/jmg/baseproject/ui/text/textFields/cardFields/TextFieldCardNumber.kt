@@ -93,6 +93,7 @@ object CreditCardVisualTransformation : VisualTransformation {
 
 class CreditCardOffsetMapping(original: String) : OffsetMapping {
     private val originalToTransformed = calculateMapping(original)
+    private val transformedToOriginal = calculateReverseMapping(originalToTransformed)
 
     private fun calculateMapping(original: String): IntArray {
         val mapping = IntArray(original.length + 1)
@@ -107,13 +108,20 @@ class CreditCardOffsetMapping(original: String) : OffsetMapping {
         return mapping
     }
 
+    private fun calculateReverseMapping(mapping: IntArray): IntArray {
+        val reverseMapping = IntArray(mapping.last() + 1)
+        mapping.forEachIndexed { originalIndex, transformedIndex ->
+            reverseMapping[transformedIndex] = originalIndex
+        }
+        return reverseMapping
+    }
+
     override fun originalToTransformed(offset: Int): Int {
         return originalToTransformed.getOrElse(offset) { originalToTransformed.last() }
     }
 
     override fun transformedToOriginal(offset: Int): Int {
-        val originalOffset = originalToTransformed.indexOf(offset)
-        return if (originalOffset != -1) originalOffset else offset
+        return transformedToOriginal.getOrElse(offset) { transformedToOriginal.last() }
     }
 }
 
