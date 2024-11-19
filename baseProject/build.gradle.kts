@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.jmg.baseproject"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 26
@@ -111,7 +111,7 @@ publishing{
         register<MavenPublication>("release"){
             groupId = "com.jmgjeremy"
             artifactId = "hhbase"
-            version = "1.2.49"
+            version = "1.2.50"
             afterEvaluate{
                 from(components["release"])
             }

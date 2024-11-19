@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -79,7 +80,7 @@ fun TextFieldBasic(
 @Composable
 fun PreviewTextFieldBasic() {
     TextFieldBasic(
-        value = mutableStateOf(""),
+        value = remember { mutableStateOf("") },
         setValue = {},
         keyboardOptions = KeyboardOptions.Default,
         modifier = Modifier,
