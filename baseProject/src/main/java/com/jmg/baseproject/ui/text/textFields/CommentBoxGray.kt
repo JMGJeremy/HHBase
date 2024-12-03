@@ -37,7 +37,7 @@ fun CommentBoxGray(
     val TAG = "CommentBoxGray"
     val comment = remember { mutableStateOf("")}
     LaunchedEffect(key1 = comment.value){
-        setValue.invoke(comment.value)
+        comment.value = value.value ?: ""
     }
     TextField(
         value = comment.value,
