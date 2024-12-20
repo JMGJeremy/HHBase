@@ -28,8 +28,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -43,7 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -103,16 +103,6 @@ fun VideoScreen(
     val audioEnable = remember { mutableStateOf(true)}
     val cameraSelector = remember {
         mutableStateOf(CameraSelector.DEFAULT_FRONT_CAMERA)
-    }
-    LaunchedEffect(recordingStart.value){
-        if (recordingStart.value) {
-            val job = launch {
-                while (true) {
-                    time++
-                    delay(1000)
-                }
-            }
-        }
     }
 
     LaunchedEffect(Unit){
