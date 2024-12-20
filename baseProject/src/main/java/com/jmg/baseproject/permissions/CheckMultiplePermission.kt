@@ -12,6 +12,6 @@ fun CheckMultiplePermission(
 ){
     val launcher = rememberMultiplePermissionsState(string)
     LaunchedEffect(Unit) {
-        launcher.rememberMultiplePermissionsState()
+        launcher.launchMultiplePermissionRequest()
     }
 }
