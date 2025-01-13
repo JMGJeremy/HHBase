@@ -34,6 +34,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -55,10 +56,14 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.jmg.baseproject.HHBaseTheme
 import com.jmg.baseproject.R
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.File
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.time.LocalDateTime
+import java.util.Timer
+import java.util.TimerTask
 import java.util.concurrent.Executor
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -66,7 +71,7 @@ import java.util.concurrent.Executor
 fun VideoScreen(
     facingFront: Boolean = true,
     onImageCaptured: (Uri, Boolean) -> Unit,
-    maxTime: Long
+    maxTime: Long,
 ) {
     val TAG = "VideoScreen"
     val context = LocalContext.current
@@ -98,11 +103,30 @@ fun VideoScreen(
 
     var time by remember { mutableIntStateOf(0) }
     val previewView : PreviewView = remember { PreviewView(context) }
-    var videoCapture: MutableState<VideoCapture<Recorder>?> = remember { mutableStateOf(null)}
-    var recordingStart = remember { mutableStateOf(false)}
+    val videoCapture: MutableState<VideoCapture<Recorder>?> = remember { mutableStateOf(null)}
+    val recordingStart = remember { mutableStateOf(false)}
     val audioEnable = remember { mutableStateOf(true)}
     val cameraSelector = remember {
         mutableStateOf(CameraSelector.DEFAULT_FRONT_CAMERA)
+    }
+
+    val timer = remember { Timer() }
+    val timerStart by remember { mutableStateOf(false)}
+    LaunchedEffect(
+        recordingStart.value,
+    ) {
+        if (recordingStart.value) {
+            val t = object : TimerTask() {
+                override fun run() {
+                    time += 1
+                }
+            }
+            if (!timerStart) {
+                timer.schedule(t, 0, 1000)
+            } else if (!recordingStart.value) {
+                timer.cancel()
+            }
+        }
     }
 
     LaunchedEffect(Unit){
@@ -278,7 +302,7 @@ suspend fun Context.createVideoCaptureUseCase(
     val preview = Preview.Builder()
         .build()
         .apply{
-            setSurfaceProvider(previewView.surfaceProvider)
+            surfaceProvider = previewView.surfaceProvider
         }
     val qualitySelector = QualitySelector.from(
         Quality.SD,
